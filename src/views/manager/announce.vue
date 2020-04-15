@@ -125,6 +125,7 @@
       },
         onSubmit () {
           this.$api.createAnnounce(this.infoForm).then(res => {
+            alert(res.data)
             this.getList();
           }).catch((error) => {
             console.log(error);

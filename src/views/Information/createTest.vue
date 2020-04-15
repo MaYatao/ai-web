@@ -169,10 +169,12 @@
         this.testForm.count = this.tableData.length
       },
       save () {
+        alert(this.choiceQuestios.join())
         this.testForm.choiceQuestios = this.choiceQuestios.join()
         this.testForm.choicesQuestios = this.choicesQuestios.join()
           this.testForm.contentQuestios = this.contentQuestios.join()
         this.$api.createTest(this.testForm).then(res => {
+         alert(res.data)
         }).catch((error) => {
           console.log(error);
           alert(error)

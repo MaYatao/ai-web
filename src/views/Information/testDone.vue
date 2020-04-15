@@ -32,6 +32,7 @@
         this.testId = this.$route.query.testId
       },
      indexs (key) {
+        alert(this.rtid)
       this.$router.push({path: key,
         query: {
           'rtid': this.rtid

@@ -126,6 +126,7 @@
           if (valid) {
             this.$api.editUser(this.infoForm)
               .then((res) => {
+                alert(res.data)
                 this.$router.push({path: '/userInfo'});
               })
               .catch((error) => {

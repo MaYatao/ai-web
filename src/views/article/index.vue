@@ -93,6 +93,7 @@
         },
         getUser (uid) {
         this.$api.getUser({userId: uid}).then(response => {
+           alert(response)
           }).catch((error) => {
           console.log(error);
         });

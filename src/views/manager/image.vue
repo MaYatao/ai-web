@@ -121,6 +121,7 @@
       },
       onSubmit () {
         this.$api.createImage(this.infoForm).then(res => {
+          alert(res.data)
           this.getList();
         }).catch((error) => {
           console.log(error);
