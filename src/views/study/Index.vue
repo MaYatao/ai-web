@@ -102,7 +102,7 @@
       </el-row>
       <el-row>
         <h1>技能图谱</h1>
-      <div id='char' style='width: 400px;height: 400px; float:center'></div>
+      <div id='char' style='width: 400px;height: 400px;'></div>
       </el-row>
     </el-col>
   </el-row>
@@ -122,16 +122,13 @@
         var charts = echarts.init(document.getElementById('char'))
         var categories = [
           {
-            name: '政策问题'
+            name: '方向'
           },
           {
-            name: '政策文本'
+            name: '科目'
           },
           {
-            name: '期刊论文'
-          },
-          {
-            name: '专家'
+            name: '知识点'
           }
         ];
         var option = {
@@ -182,8 +179,8 @@
             },
             label: {
               emphasis: {
-                position: 'right',
-                show: true
+                position: 'center',
+                show: false
               }
             },
             emphasis: {
@@ -195,198 +192,163 @@
                 width: 3
               }
             },
-            data: [{
-              name: '公立医院薪酬制度改革',
-              category: '政策问题',
+            data: [
+              {
+              name: 'Java工程师',
+              category: '方向',
               symbolSize: 70,
               label: {
                 show: true
               }
             },
               {
-                name: '关于开展公立医院薪酬制度改革试点工作的指导意见',
-                category: '政策文本'
+                name: '哈哈',
+                category: '科目'
               },
               {
-                name: '国务院办公厅关于印发深化医药卫生体制改革2019年重点工作任务的通知',
-                category: '政策文本'
+                name: '嘿嘿',
+                category: '科目'
               },
               {
-                name: '国务院办公厅印发关于改革完善医疗卫生行业综合监管制度的指导意见',
-                category: '政策文本'
+                name: '嘻嘻',
+                category: '科目'
               },
               {
-                name: '国务院办公厅关于印发2011年公立医院改革试点工作安排的通知',
-                category: '政策文本'
+                name: '呵呵',
+                category: '科目'
               },
               {
-                name: '人力资源社会保障部财政部国家卫生计生委国家中医药管理局关于扩大公立医院薪酬制度改革试点的通知',
-                category: '政策文本'
+                name: '啊啊',
+                category: '科目'
               },
               {
-                name: '中共中央国务院关于深化医药卫生体制改革的意见',
-                category: '政策文本'
+                name: '嗯嗯',
+                category: '科目'
               },
               {
-                name: '国务院关于印发医药卫生体制改革近期重点实施方案（2009—2011年）的通知',
-                category: '政策文本'
+                name: '哎哎',
+                category: '科目'
               },
               {
-                name: '我国公立医院薪酬制度存在的问题及改革建议',
-                category: '期刊论文'
+                name: '哼哼',
+                category: '知识点'
               },
               {
-                name: '改革公立医院竞争激励机制',
-                category: '期刊论文'
+                name: '哎呀',
+                category: '知识点'
               },
               {
-                name: '医改背景下公立医院绩效分配制度研究',
-                category: '期刊论文'
+                name: '嘿呀',
+                category: '知识点'
               },
               {
-                name: '城市公立医院薪酬改革配套政策问题研究',
-                category: '期刊论文'
+                name: '嘿哈',
+                category: '知识点'
               },
               {
-                name: '宽带薪酬在我国大型公立医院的适用性分析',
-                category: '期刊论文'
-              },
-              {
-                name: '王延中',
-                category: '专家'
-              },
-              {
-                name: '李建军',
-                category: '专家'
-              },
-              {
-                name: '雷志勤',
-                category: '专家'
-              },
-              {
-                name: '李玉萍',
-                category: '专家'
-              },
-              {
-                name: '张光鹏',
-                category: '专家'
+                name: '咯咯',
+                category: '知识点'
               }
             ],
             links: [{
-              source: '我国公立医院薪酬制度存在的问题及改革建议',
-              target: '公立医院薪酬制度改革',
+              source: '哼哼',
+              target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '改革公立医院竞争激励机制',
-              target: '公立医院薪酬制度改革',
+              source: '哎呀',
+              target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '医改背景下公立医院绩效分配制度研究',
-              target: '公立医院薪酬制度改革',
+              source: '嘿呀',
+              target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '城市公立医院薪酬改革配套政策问题研究',
-              target: '公立医院薪酬制度改革',
+              source: '嘿哈',
+              target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '宽带薪酬在我国大型公立医院的适用性分析',
-              target: '公立医院薪酬制度改革',
+              source: '咯咯',
+              target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '王延中',
-              target: '公立医院薪酬制度改革',
+              source: '嘿嘿',
+              target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '张光鹏',
-              target: '国务院办公厅关于印发深化医药卫生体制改革2019年重点工作任务的通知',
-              value: '研究政策'
-            }, {
-              source: '张光鹏',
-              target: '关于开展公立医院薪酬制度改革试点工作的指导意见',
-              value: '研究政策'
-            }, {
-              source: '张光鹏',
-              target: '国务院办公厅关于印发2011年公立医院改革试点工作安排的通知',
-              value: '研究政策'
-            }, {
-              source: '国务院办公厅关于印发深化医药卫生体制改革2019年重点工作任务的通知',
-              target: '公立医院薪酬制度改革',
+              source: '哈哈',
+              target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '关于开展公立医院薪酬制度改革试点工作的指导意见',
-              target: '公立医院薪酬制度改革',
+              source: '嘻嘻',
+              target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '国务院办公厅印发关于改革完善医疗卫生行业综合监管制度的指导意见',
-              target: '公立医院薪酬制度改革',
+              source: '呵呵',
+              target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '国务院办公厅关于印发2011年公立医院改革试点工作安排的通知',
-              target: '公立医院薪酬制度改革',
+              source: '啊啊',
+              target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '人力资源社会保障部财政部国家卫生计生委国家中医药管理局关于扩大公立医院薪酬制度改革试点的通知',
-              target: '公立医院薪酬制度改革',
+              source: '嗯嗯',
+              target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '中共中央国务院关于深化医药卫生体制改革的意见',
-              target: '公立医院薪酬制度改革',
+              source: '哎哎',
+              target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '国务院关于印发医药卫生体制改革近期重点实施方案（2009—2011年）的通知',
-              target: '公立医院薪酬制度改革',
-              value: '提出解决方案'
-            }, {
-              source: '我国公立医院薪酬制度存在的问题及改革建议',
-              target: '改革公立医院竞争激励机制',
+              source: '哼哼',
+              target: '哎呀',
               value: '对立'
             }, {
-              source: '城市公立医院薪酬改革配套政策问题研究',
-              target: '医改背景下公立医院绩效分配制度研究',
+              source: '嘿哈',
+              target: '嘿呀',
               value: '相继'
             }, {
               source: '王延中',
-              target: '我国公立医院薪酬制度存在的问题及改革建议',
+              target: '哼哼',
               value: '作者'
             }, {
               source: '李建军',
-              target: '医改背景下公立医院绩效分配制度研究',
+              target: '嘿呀',
               value: '作者'
             }, {
               source: '李建军',
-              target: '城市公立医院薪酬改革配套政策问题研究',
+              target: '嘿哈',
               value: '作者'
             }, {
               source: '雷志勤',
-              target: '城市公立医院薪酬改革配套政策问题研究',
+              target: '嘿哈',
               value: '作者'
             }, {
               source: '李玉萍',
-              target: '医改背景下公立医院绩效分配制度研究',
+              target: '嘿呀',
               value: '作者'
             }, {
-              source: '关于开展公立医院薪酬制度改革试点工作的指导意见',
-              target: '人力资源社会保障部财政部国家卫生计生委国家中医药管理局关于扩大公立医院薪酬制度改革试点的通知',
+              source: '哈哈',
+              target: '啊啊',
               value: '相继'
             }, {
-              source: '人力资源社会保障部财政部国家卫生计生委国家中医药管理局关于扩大公立医院薪酬制度改革试点的通知',
-              target: '国务院办公厅关于印发深化医药卫生体制改革2019年重点工作任务的通知',
+              source: '啊啊',
+              target: '嘿嘿',
               value: '相继'
             }, {
-              source: '国务院办公厅印发关于改革完善医疗卫生行业综合监管制度的指导意见',
-              target: '关于开展公立医院薪酬制度改革试点工作的指导意见',
+              source: '嘻嘻',
+              target: '哈哈',
               value: '支持'
             }, {
-              source: '国务院关于印发医药卫生体制改革近期重点实施方案（2009—2011年）的通知',
-              target: '中共中央国务院关于深化医药卫生体制改革的意见',
+              source: '哎哎',
+              target: '嗯嗯',
               value: '支持'
             }, {
-              source: '国务院关于印发医药卫生体制改革近期重点实施方案（2009—2011年）的通知',
-              target: '国务院办公厅关于印发2011年公立医院改革试点工作安排的通知',
+              source: '哎哎',
+              target: '呵呵',
               value: '总分'
             }, {
-              source: '中共中央国务院关于深化医药卫生体制改革的意见',
-              target: '国务院办公厅关于印发2011年公立医院改革试点工作安排的通知',
+              source: '嗯嗯',
+              target: '呵呵',
               value: '总分'
             }],
             categories: categories
