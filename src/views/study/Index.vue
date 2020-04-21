@@ -174,7 +174,7 @@
             },
             lineStyle: {
               width: 0.5,
-              curveness: 0.3,
+              curveness: 0, /* 线条弯的角度 */
               opacity: 0.8
             },
             label: {

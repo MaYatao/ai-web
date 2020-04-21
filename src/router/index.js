@@ -15,6 +15,7 @@ import articleEdit from '../views/article/edit'
 import articleDetail from '../views/article/Detail'
 import course from '../views/course/index'
 import courseBody from '../views/course/CourseBody'
+import myCourse from '../views/course/MyCourse'
 import courseDetail from '../views/course/CourseDetail'
 import courseManager from '../views/course/courseManager'
 import createCourse from '../views/course/createCourse'
@@ -31,6 +32,9 @@ import choiceQuestion from '../views/Information/choiceQuestion'
 import choicesQuestion from '../views/Information/choicesQuestion'
 import ContentQuestion from '../views/Information/ContentQuestion'
 import informationIndex from '../views/Information/Index'
+import myInfo from '../views/Information/MyInfo'
+import myTests from '../views/Information/MyTests'
+import myQuestions from '../views/Information/MyQuestions'
 import studyIndex from '../views/study/Index'
 import messageIndex from '../views/message/Index'
 import userIndex from '../views/user/Index'
@@ -154,9 +158,45 @@ export default new Router({
           },
           children: [
             {
+              path: '/myInfo',
+              name: 'myInfo',
+              component: myInfo,
+              meta: {
+                isLogin: true, // 是否登录
+                roles: ['学生', '教师'] // 是否登录
+              }
+            },
+            {
               path: '/image',
               name: 'image',
               component: image,
+              meta: {
+                isLogin: true, // 是否登录
+                roles: ['学生', '教师'] // 是否登录
+              }
+            },
+            {
+              path: '/myQuestions',
+              name: 'myTests',
+              component: myTests,
+              meta: {
+                isLogin: true, // 是否登录
+                roles: ['学生', '教师'] // 是否登录
+              }
+            },
+            {
+              path: '/myQuestions',
+              name: 'myQuestions',
+              component: myQuestions,
+              meta: {
+                isLogin: true, // 是否登录
+                roles: ['学生', '教师'] // 是否登录
+              }
+            },
+            {
+              path: '/myCourse',
+              name: 'myCourse',
+              component: myCourse,
               meta: {
                 isLogin: true, // 是否登录
                 roles: ['学生', '教师'] // 是否登录

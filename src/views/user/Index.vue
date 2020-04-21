@@ -18,8 +18,8 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="/studyIndex">我的学习</el-menu-item>
-            <el-menu-item index="1-2">我的课程</el-menu-item>
-            <el-menu-item index="1-3">我的练习</el-menu-item>
+            <el-menu-item index="/myCourse">我的课程</el-menu-item>
+            <el-menu-item index="/myInfo">我的练习</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">
