@@ -39,7 +39,7 @@
             <span>课程信息</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/courseManager">我的课程</el-menu-item>
+            <el-menu-item index="/myCourse">我的课程</el-menu-item>
             <el-menu-item index="/createCourse">创建课程</el-menu-item>
             <el-menu-item index="/courseStatistics">课程分析</el-menu-item>
           </el-menu-item-group>
@@ -51,8 +51,8 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="createTest">创建试卷</el-menu-item>
-            <el-menu-item index="4-2">我的试题</el-menu-item>
-            <el-menu-item index="4-3">我的试卷</el-menu-item>
+            <el-menu-item index="myQuestions">我的试题</el-menu-item>
+            <el-menu-item index="myTests">我的试卷</el-menu-item>
           </el-menu-item-group>
           <el-submenu index="4-4">
             <template slot="title">上传试题</template>

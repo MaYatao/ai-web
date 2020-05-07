@@ -1,5 +1,4 @@
 <template>
-
   <div>{{content}}</div>
 </template>
 <script>
@@ -22,7 +21,7 @@
             this.content = this.$route.query.content;
           },
           getRecordestById () {
-            this.$api.serach({'rtid': this.rtForm.rtid}).then(res => {
+            this.$api.serach({'content': this.content}).then(res => {
               this.rtForm = res.data
             }).catch((error) => {
               console.log(error);

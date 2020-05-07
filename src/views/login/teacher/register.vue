@@ -54,14 +54,7 @@
           placeholder="学校">
         </el-input>
       </el-form-item>
-      <el-form-item prop="position" label="职称">
-        <el-input
-          type="text"
-          v-model="ReginForm.position"
-          placeholder="期望方向">
-        </el-input>
-      </el-form-item>
-      <el-form-item prop="school" label="自我描述">
+      <el-form-item prop="description" label="自我描述">
         <el-input
           type="textarea"
           v-model="ReginForm.description"
@@ -113,7 +106,6 @@
           sex: 1,
           school: '',
           identity: 1,
-          position: '',
           description: ''
         },
         logining: false,

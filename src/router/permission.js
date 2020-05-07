@@ -2,6 +2,7 @@ import router from './index'
 import store from '../store/index'
 
 router.beforeEach((to, from, next) => {
+  alert(223)
   let isLogin = store.state.isLogin
   if (isLogin === true) {
     let role = store.state.roles

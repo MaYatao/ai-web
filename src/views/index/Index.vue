@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-row :gutter="20">
     <el-menu
       :default-active="activeIndex"
       class="el-menu-demo"
@@ -8,7 +9,6 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-row :gutter="20">
         <el-col :span="2">
           <div class="grid-content bg-purple">
             <el-menu-item index="/main">首页</el-menu-item>
@@ -34,12 +34,13 @@
             <el-menu-item index="/studyIndex">学习</el-menu-item>
           </div>
         </el-col>-->
-        <el-col :span="6">
-            <div class="grid-content bg-purple">
-                <el-input v-model="content" style="width: 300px"></el-input>
-                <el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
-            </div>
-        </el-col>
+      <el-col :span="3" >
+        <el-input  size="mini" v-model="content" style="width:150px;line-height: 60px; "></el-input>
+      </el-col>
+      <el-col :span="2"   >
+        <el-button type="primary" size="mini"  style="float: left;vertical-align: bottom" icon="el-icon-search" @click="search">搜索</el-button>
+      </el-col>
+
         <el-col :span="2">
           <div class="grid-content bg-purple">
             <el-menu-item index="/messageIndex">
@@ -50,13 +51,19 @@
           </div>
         </el-col>
         <el-col :span="2">
-          <div class="grid-content bg-purple">
+          <template v-if="user.username!=null">
             <el-menu-item index="userIndex">{{user.username}}</el-menu-item>
-          </div>
+          </template>
+          <template v-if="user.username==null">
+            <el-menu-item index="/login">请去登录</el-menu-item>
+          </template>
         </el-col>
-      </el-row>
-            <el-button @click="logout">退出</el-button>
+      <el-col :span="2" >
+        <el-menu-item index="logout">退出</el-menu-item>
+      </el-col>
     </el-menu>
+      </el-row>
+
     <router-view></router-view>
   </div>
 
@@ -82,7 +89,11 @@
           }});
       },
       handleSelect (key, keyPath) {
-        this.$router.push(key)
+        if (key === 'logout') {
+          this.logout()
+        } else {
+          this.$router.push(key)
+        }
       },
       logout () {
         alert('退出成功')
@@ -95,6 +106,7 @@
     },
     created () {
       // 自动加载indexs方法
+      alert(0)
       this.indexs();
     }
   }

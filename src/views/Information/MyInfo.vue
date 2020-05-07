@@ -1,28 +1,45 @@
 <template>
-  <div>
-  <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="我的试卷" name="/myQuestions">用户管理</el-tab-pane>
-      <el-tab-pane label="我是题目" name="/myTests">配置管理</el-tab-pane>
+  <div class="tabZujian">
+    <el-tabs v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="tab1" name="first" :key="'first'">
+        <child1 v-if="isChildUpdate1"></child1>
+      </el-tab-pane>
+      <el-tab-pane label="tab2" name="second" :key="'second'">
+        <child2 v-if="isChildUpdate2"></child2>
+      </el-tab-pane>
     </el-tabs>
-
-      <router-view></router-view></div>
-
-  </template>
+  </div>
+</template>
 
 <script>
+    import MyQuestions from '@/views/Information/MyQuestions'
+    import MyTests from '@/views/Information/MyTests'
     export default {
-        name: 'MyInfo',
+      name: 'MyInfo',
+      components: {
+        child1: MyQuestions,
+        child2: MyTests
+      },
       data () {
         return {
-          activeName: '/myQuestions'
-        };
+          // 默认第一个选项卡
+          activeName: 'first',
+          isChildUpdate1: true,
+          isChildUpdate2: false
+        }
+      },
+      mounted () {
+
       },
       methods: {
-        handleClick (tab, event) {
-          console.clear()
-          console.log(tab)
-          alert(tab)
-          this.$router.push(tab)
+        handleClick (tab) {
+          if (tab.name === 'first') {
+            this.isChildUpdate1 = true;
+            this.isChildUpdate2 = false;
+          } else if (tab.name === 'second') {
+            this.isChildUpdate1 = false;
+            this.isChildUpdate2 = true;
+          }
         }
       }
     }

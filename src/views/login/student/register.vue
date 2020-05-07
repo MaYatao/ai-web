@@ -52,14 +52,14 @@
           placeholder="学校">
         </el-input>
       </el-form-item>
-      <el-form-item prop="school" label="期望方向">
+      <el-form-item prop="direction" label="期望方向">
         <el-input
           type="text"
-          v-model="ReginForm.expectation"
+          v-model="ReginForm.direction"
           placeholder="期望方向">
         </el-input>
       </el-form-item>
-      <el-form-item prop="school" label="自我描述">
+      <el-form-item prop="description" label="自我描述">
         <el-input
           type="textarea"
           v-model="ReginForm.description"
