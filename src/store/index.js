@@ -7,10 +7,10 @@ Vue.use(Vuex)
 Vue.prototype.$api = Api;
 const store = new Vuex.Store({
   state: {
-    isLogin: false,
+    isLogin: true,
     name: '',
     user: JSON.parse(localStorage.getItem('userInfo')) || '', // 先去localStorage中获取数据,
-    roles: []
+    roles: ['教师']
   },
   mutations: {
     set_isLogin (state, flag) {

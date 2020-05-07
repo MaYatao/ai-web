@@ -52,10 +52,6 @@ export default new Router({
       path: '/',
       name: 'index',
       component: index,
-      meta: {
-        isLogin: true, // 是否登录
-        roles: ['学生', '教师'] // 是否登录
-      },
       children: [
         {
           path: '/search',
@@ -78,11 +74,7 @@ export default new Router({
         {
           path: '/main',
           name: 'main',
-          component: main,
-          meta: {
-            isLogin: true, // 是否登录
-            roles: ['学生', '教师'] // 是否登录
-          }
+          component: main
         },
         {
           path: '/luntan',
