@@ -1,59 +1,55 @@
 <template>
   <el-row :gutter="20">
     <el-col :span="16">
-      <el-row>
+      <el-row >
         <h3 >
           专项练习
         </h3>
+        <div align="center">
         <table >
           <thead>
           <tr>
-            <th>共刷题：1024</th>
-            <th>做对题目：888</th>
-            <th>最近一周平均分：</th>
-            <th>排名：66</th>
+            <td >共刷题：1024</td>
+            <td>做对题目：888</td>
+            <td>最近一周平均分：</td>
+            <td>排名：66</td>
           </tr>
           </thead>
         </table>
+
         <table class='table table-hover table-bordered'>
-          <thead>
           <tr>
-            <th></th>
             <th>最近一周练习知识点</th>
             <th>做对数/总做题数</th>
             <th>正确率</th>
             <th></th>
           </tr>
-          </thead>
-          <tbody>
           <tr>
-            <td><input type='radio' ></td>
             <td>数据库</td>
             <td>100/125</td>
             <td>80%</td>
             <td><el-button type='primary' >进入练习</el-button></td>
           </tr>
           <tr>
-            <td><input type='radio' ></td>
             <td>计算机网络</td>
             <td>55/100</td>
             <td>55%</td>
             <td><el-button type='primary' >进入练习</el-button></td>
           </tr>
           <tr>
-            <td><input type='radio' ></td>
             <td>操作系统</td>
             <td>10/10</td>
             <td>100%</td>
             <td><el-button type='primary' >进入练习</el-button></td>
           </tr>
-          </tbody>
         </table>
+        </div>
       </el-row>
       <el-row>
         <h3 class='text-left text-info'>
           我的课程
         </h3>
+        <div align="center">
         <table class='table'>
           <thead>
           <tr>
@@ -84,9 +80,9 @@
           </tr>
           </tbody>
         </table>
+        </div>
       </el-row>
       <el-row>
-
       </el-row>
      </el-col>
     <el-col :span="8">
@@ -101,8 +97,7 @@
 
       </el-row>
       <el-row>
-        <h1>技能图谱</h1>
-      <div id='char' style='width: 400px;height: 400px;'></div>
+      <div id='char' style='width: 400px;height: 400px;margin: 30px'></div>
       </el-row>
     </el-col>
   </el-row>
@@ -202,154 +197,103 @@
               }
             },
               {
-                name: '哈哈',
+                name: '计算机网络',
                 category: '科目'
               },
               {
-                name: '嘿嘿',
+                name: '操作系统',
                 category: '科目'
               },
               {
-                name: '嘻嘻',
+                name: 'Java编程语言',
                 category: '科目'
               },
               {
-                name: '呵呵',
+                name: '数据结构',
                 category: '科目'
               },
               {
-                name: '啊啊',
+                name: 'Spring',
                 category: '科目'
               },
               {
-                name: '嗯嗯',
+                name: 'MySQL',
                 category: '科目'
               },
               {
-                name: '哎哎',
-                category: '科目'
-              },
-              {
-                name: '哼哼',
+                name: '封装',
                 category: '知识点'
               },
               {
-                name: '哎呀',
+                name: '继承',
                 category: '知识点'
               },
               {
-                name: '嘿呀',
+                name: '多态',
                 category: '知识点'
               },
               {
-                name: '嘿哈',
+                name: '进程',
                 category: '知识点'
               },
               {
-                name: '咯咯',
+                name: 'TCP',
                 category: '知识点'
               }
             ],
             links: [{
-              source: '哼哼',
+              source: '计算机网络',
+              target: 'Java工程师',
+              value: '属于'
+            }, {
+              source: '操作系统',
+              target: 'Java工程师',
+              value: '属于'
+            },
+              {
+              source: 'Java编程语言',
+              target: 'Java工程师',
+              value: '属于'
+            }, {
+              source: 'MySQL',
+              target: 'Java工程师',
+              value: '属于'
+            }, {
+              source: '封装',
+              target: 'Java编程语言',
+              value: '提出解决方案'
+            }, {
+              source: '继承',
+              target: 'Java编程语言',
+              value: '提出解决方案'
+            }, {
+              source: '多态',
+              target: 'Java编程语言',
+              value: '提出解决方案'
+            }, {
+              source: 'TCP',
+              target: '计算机网络',
+              value: '提出解决方案'
+            }, {
+              source: '进程',
+              target: 'Java编程语言',
+              value: '提出解决方案'
+            }, {
+              source: '进程',
+              target: '操作系统',
+              value: '提出解决方案'
+            }, {
+              source: '数据结构',
               target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '哎呀',
+              source: 'Spring',
               target: 'Java工程师',
               value: '提出解决方案'
             }, {
-              source: '嘿呀',
-              target: 'Java工程师',
-              value: '提出解决方案'
-            }, {
-              source: '嘿哈',
-              target: 'Java工程师',
-              value: '提出解决方案'
-            }, {
-              source: '咯咯',
-              target: 'Java工程师',
-              value: '提出解决方案'
-            }, {
-              source: '嘿嘿',
-              target: 'Java工程师',
-              value: '提出解决方案'
-            }, {
-              source: '哈哈',
-              target: 'Java工程师',
-              value: '提出解决方案'
-            }, {
-              source: '嘻嘻',
-              target: 'Java工程师',
-              value: '提出解决方案'
-            }, {
-              source: '呵呵',
-              target: 'Java工程师',
-              value: '提出解决方案'
-            }, {
-              source: '啊啊',
-              target: 'Java工程师',
-              value: '提出解决方案'
-            }, {
-              source: '嗯嗯',
-              target: 'Java工程师',
-              value: '提出解决方案'
-            }, {
-              source: '哎哎',
-              target: 'Java工程师',
-              value: '提出解决方案'
-            }, {
-              source: '哼哼',
-              target: '哎呀',
+              source: 'Spring',
+              target: 'Java编程语言',
               value: '对立'
-            }, {
-              source: '嘿哈',
-              target: '嘿呀',
-              value: '相继'
-            }, {
-              source: '王延中',
-              target: '哼哼',
-              value: '作者'
-            }, {
-              source: '李建军',
-              target: '嘿呀',
-              value: '作者'
-            }, {
-              source: '李建军',
-              target: '嘿哈',
-              value: '作者'
-            }, {
-              source: '雷志勤',
-              target: '嘿哈',
-              value: '作者'
-            }, {
-              source: '李玉萍',
-              target: '嘿呀',
-              value: '作者'
-            }, {
-              source: '哈哈',
-              target: '啊啊',
-              value: '相继'
-            }, {
-              source: '啊啊',
-              target: '嘿嘿',
-              value: '相继'
-            }, {
-              source: '嘻嘻',
-              target: '哈哈',
-              value: '支持'
-            }, {
-              source: '哎哎',
-              target: '嗯嗯',
-              value: '支持'
-            }, {
-              source: '哎哎',
-              target: '呵呵',
-              value: '总分'
-            }, {
-              source: '嗯嗯',
-              target: '呵呵',
-              value: '总分'
             }],
             categories: categories
           }]
@@ -361,5 +305,13 @@
 </script>
 
 <style scoped>
-
+.table{
+ margin: 10px
+}
+  td{
+    width:150px
+  }
+  th{
+    width:150px
+  }
 </style>

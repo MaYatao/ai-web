@@ -21,10 +21,12 @@
         <el-col :span="18">
           <el-radio-group v-model="listQuery.subject">
               <el-radio-button label="-1" style="float: left">全部</el-radio-button>
-              <div  v-for="direction in subjectList" :key="direction">
-                <el-radio-button style="float: left" v-for="subject in direction.children" :key="subject.value" :label=subject.value >{{subject.label}}
+              <div  v-for="direction in subjectList" :key="direction" >
+                <el-radio-button style="float: left" v-for=" subject in direction.children" :key="subject.value"  v-show =" subject.value >30 ? false :true" :label=subject.value >{{subject.label}}
                 </el-radio-button>
               </div>
+            <el-radio-button style="float: left">更多...
+            </el-radio-button>
           </el-radio-group>
         </el-col>
       </el-row>
@@ -40,14 +42,7 @@
         </el-col>
       </el-row>
     </el-header>
-    <el-main style="margin: 250px 100px">
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
+    <el-main style="margin: 150px 100px">
       <el-container>
         <el-header>
           <h1 style="float: left">
@@ -135,7 +130,10 @@
   .el-col {
     border-radius: 4px;
   }
-
+  .el-radio-button{
+    width: auto;
+    height: auto;
+  }
   .bg-purple-dark {
     background: #99a9bf;
   }

@@ -16,11 +16,7 @@
             <i class="el-icon-location"></i>
             <span>学习信息</span>
           </template>
-          <el-menu-item-group>
-            <el-menu-item index="/studyIndex">我的学习</el-menu-item>
-            <el-menu-item index="/myCourse">我的课程</el-menu-item>
-            <el-menu-item index="/myInfo">我的练习</el-menu-item>
-          </el-menu-item-group>
+          <el-menu-item index="/studyIndex">我的学习</el-menu-item>
         </el-submenu>
         <el-submenu index="2">
           <template slot="title">
@@ -87,7 +83,7 @@
     </el-col>
     <el-col :span="20">
       <div class="content">
-        <router-view :key="key"></router-view>
+        <router-view ></router-view>
       </div>
     </el-col>
   </el-row>
@@ -100,12 +96,13 @@
     data () {
       return {};
     },
-    computed: {
-      key () {
-        return this.$route.path + Math.random();
-      }
+   created () {
+     this.index()
     },
     methods: {
+      index () {
+        this.$router.push({path: '/studyIndex'})
+      },
       handleOpen (key, keyPath) {
         console.log(key, keyPath);
       },

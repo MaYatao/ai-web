@@ -114,18 +114,7 @@ export function addViews (data) {
   })
 }
 
-/**
- *
- * @param 访问者，作者，文章id
- * @returns {AxiosPromise}
- */
-export function addCollection (data) {
-  return request({
-    url: '/blog/addCollection',
-    method: 'post',
-    params: {...data}
-  })
-}
+
 /**
  *
  * @param 访问者，作者，文章id
@@ -168,6 +157,14 @@ export function getSubjects () {
   return request({
     url: '/study/getSubjects',
     method: 'get'
+  })
+}
+
+export function getKnowledgesBySId (data) {
+  return request({
+    url: '/study/getKnowledgesBySId',
+    method: 'post',
+    params: {...data}
   })
 }
 export function createCourse (datas) {

@@ -27,24 +27,11 @@
               ></quill-editor>
             </div>
           </el-form-item>
-          <el-form-item style="margin: 100px 100px; " label="添加标签">
-            <el-tag
-              :key="tag"
-              v-for="tag in dynamicTags"
-              closable
-              :disable-transitions="false"
-              @close="handleClose(tag)"
-            >{{tag}}</el-tag>
-            <el-input
-              class="input-new-tag"
-              v-if="inputVisible"
-              v-model="inputValue"
-              ref="saveTagInput"
-              size="small"
-              @keyup.enter.native="handleInputConfirm"
-              @blur="handleInputConfirm"
-            ></el-input>
-            <el-button v-else class="button-new-tag" size="small" @click="showInput">添加新标签</el-button>
+          <el-form-item label="科目" style="margin: 10px 60px">
+            <el-cascader :options="options" v-model="subjectId" clearable></el-cascader>
+          </el-form-item>
+          <el-form-item style="margin: 100px 100px; ">
+            <el-button class="button-new-tag" size="small" @click="showInput">添加知识点</el-button>
           </el-form-item>
           <el-form-item style="margin: 100px 100px">
             <el-button type="primary" @click="onDraft">存为草稿</el-button>
@@ -61,14 +48,17 @@ import { quillEditor } from "vue-quill-editor"; // 调用编辑器
 export default {
   data() {
     return {
-      dynamicTags: ["Java", "标签二", "标签三"],
+      dynamicTags: [],
       inputVisible: false,
       inputValue: "",
+      subjectId: "",
+      knowledges: [],
+      options: [],
       infoForm: {
         title: "",
         content: "",
         userId: this.$store.state.user.userId,
-        flag: "",
+        topic: "",
         status: 0,
         comment: true
       }
@@ -80,26 +70,35 @@ export default {
     }
   },
   mounted() {
-    // 初始化
+    this.getSubject();
   },
   methods: {
+    getSubject() {
+      this.$api
+        .getSubjects()
+        .then(res => {
+          this.options = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+          alert(error);
+        });
+    },
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
 
     showInput() {
-      this.inputVisible = true;
-      this.$nextTick(_ => {
-        this.$refs.saveTagInput.$refs.input.focus();
-      });
-    },
-    handleInputConfirm() {
-      let inputValue = this.inputValue;
-      if (inputValue) {
-        this.dynamicTags.push(inputValue);
-      }
-      this.inputVisible = false;
-      this.inputValue = "";
+      this.$api
+        .getKnowledgesBySId({ subjectId: this.subjectId[1] })
+        .then(res => {
+          this.knowledges = res.data;
+          this.dynamicTags = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+          alert(error);
+        });
     },
     onEditorReady(editor) {},
     onSubmit() {

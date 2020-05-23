@@ -151,10 +151,10 @@
               this.$router.push({ path: '/login' });
             })
               .catch((error) => {
-                console.log(error);
+                alert(error);
               });
           } else {
-            console.log('submit err')
+            alert('submit err')
           }
           this.$router.push('/');
         })

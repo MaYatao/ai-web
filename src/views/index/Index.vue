@@ -101,13 +101,9 @@ export default {
         this.$router.push(key);
       }
     },
-    logout() {
-      alert("退出成功");
-      this.$store.commit("logout");
-      this.$router.push("/login");
-    },
-    indexs() {
-      this.$router.push("/main");
+    created () {
+      // 自动加载indexs方法
+      this.indexs();
     }
   },
   created() {

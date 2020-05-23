@@ -145,18 +145,34 @@ export default {
           console.log(error);
           alert(error);
         });
-    }, 
-    getKnowledgesBySid(sid) {
+    },
+    handleInputConfirm() {
+      let inputValue = this.inputValue;
+      if (inputValue) {
+        this.dynamicTags.push(inputValue);
+      }
+      this.inputVisible = false;
+      this.inputValue = "";
+    },
+    onSubmit() {
+      // 提交
+      for (let i = 0; i < this.fileList.length; i++) {
+        this.sourceList.push(this.fileList[i].response.data);
+      }
+      this.infoForm.source = this.sourceList.join();
+      this.infoForm.direction = this.sort[0];
+      this.infoForm.subject = this.sort[1];
+      this.infoForm.knowledges = this.dynamicTags.join();
       this.$api
-        .getKnowledgesBySid(sid)
+        .createCourse(this.infoForm)
         .then(res => {
-          this.options = res.data;
+          // this.$router.push('/luntan');
         })
         .catch(error => {
           console.log(error);
           alert(error);
         });
-    }
+    },
     // 上传资料
     handleChange(file, fileList) {
       this.fileList = fileList;
