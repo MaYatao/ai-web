@@ -16,15 +16,15 @@
           <el-input v-model="infoForm.goal"></el-input>
         </el-form-item>
         <el-form-item label="科目" style="margin: 30px 60px">
-          <el-cascader :options="options" v-model="sort" clearable></el-cascader>
+          <el-cascader @change="getKnowledgesBySId" :options="subjectOptions" v-model="sort" clearable placeholder="请选择"></el-cascader>
         </el-form-item>
-        <el-form-item label="知识点" prop="infoForm.knowledges" style="margin: 30px 60px">
-          <el-select v-model="value1" multiple placeholder="请选择">
+        <el-form-item v-if="sort.length !== 0" label="知识点" style="margin: 30px 60px">
+          <el-select v-model="knowledges" multiple placeholder="请选择">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in knowledgeOptions"
+              :key="item.knowledgeId"
+              :label="item.title"
+              :value="item.knowledgeId"
             ></el-option>
           </el-select>
         </el-form-item>
@@ -114,16 +114,17 @@ export default {
         description: "",
         userId: this.$store.state.user.userId,
         basics: "",
-        knowledges: "",
         subject: "",
         direction: "",
         source: "",
         url: "",
         imageUrl: ""
       },
+      knowledges: [],
       fileList: [],
       sourceList: [],
-      options: [],
+      subjectOptions: [],
+      knowledgeOptions: [],
       videoFlag: false,
       videoUploadPercent: "", // 是否显示进度条
       // 进度条的进度，
@@ -139,7 +140,19 @@ export default {
       this.$api
         .getSubjects()
         .then(res => {
-          this.options = res.data;
+          this.subjectOptions = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+          alert(error);
+        });
+    },
+    getKnowledgesBySId(values) {
+      this.knowledges = [];
+      this.$api
+        .getKnowledgesBySId({ subjectId : values[1] })
+        .then(res => {
+          this.knowledgeOptions = res.data;
         })
         .catch(error => {
           console.log(error);
@@ -153,25 +166,6 @@ export default {
       }
       this.inputVisible = false;
       this.inputValue = "";
-    },
-    onSubmit() {
-      // 提交
-      for (let i = 0; i < this.fileList.length; i++) {
-        this.sourceList.push(this.fileList[i].response.data);
-      }
-      this.infoForm.source = this.sourceList.join();
-      this.infoForm.direction = this.sort[0];
-      this.infoForm.subject = this.sort[1];
-      this.infoForm.knowledges = this.dynamicTags.join();
-      this.$api
-        .createCourse(this.infoForm)
-        .then(res => {
-          // this.$router.push('/luntan');
-        })
-        .catch(error => {
-          console.log(error);
-          alert(error);
-        });
     },
     // 上传资料
     handleChange(file, fileList) {
@@ -235,10 +229,12 @@ export default {
         this.sourceList.push(this.fileList[i].response.data);
       }
       this.infoForm.source = this.sourceList.join();
-      alert(this.infoForm.source);
       this.infoForm.direction = this.sort[0];
       this.infoForm.subject = this.sort[1];
-      this.infoForm.knowledges = this.dynamicTags.join();
+      // knowledges数组拆开为三个参数
+      this.infoForm.knowledges1 = this.knowledges[0];
+      this.infoForm.knowledges2 = this.knowledges[1];
+      this.infoForm.knowledges3 = this.knowledges[2];
       this.$api
         .createCourse(this.infoForm)
         .then(res => {
