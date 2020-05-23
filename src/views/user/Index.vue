@@ -1,9 +1,9 @@
 <template>
-  <el-row class="tac">
-    <el-col :span="3">
+  <el-row style="margin-top: -20px">
+    <el-col :span="4">
       <el-menu
+        class="info-sub-menu"
         default-active="this.$route.path"
-        class="el-menu-vertical-demo"
         :unique-opened="true"
         :router="true"
         @open="handleOpen"
@@ -81,13 +81,12 @@
         </el-submenu>
       </el-menu>
     </el-col>
-    <el-col :span="20">
+    <el-col :span="20" style="padding-top: 20px">
       <div class="content">
         <router-view ></router-view>
       </div>
     </el-col>
   </el-row>
-
 </template>
 
 <script>

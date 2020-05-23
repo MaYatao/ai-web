@@ -1,6 +1,6 @@
 <template>
-  <el-row :gutter="20">
-    <el-col :span="16">
+  <el-row>
+    <el-col :span="14">
       <el-row >
         <h3 >
           专项练习
@@ -85,7 +85,7 @@
       <el-row>
       </el-row>
      </el-col>
-    <el-col :span="8">
+    <el-col :span="10">
       <el-row>
       <el-tag>
         周日 11-17
