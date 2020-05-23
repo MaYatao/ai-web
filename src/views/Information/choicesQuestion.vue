@@ -19,21 +19,9 @@
           </el-form-item>
           <br>
           <el-form-item style="margin:50px 100px; " label="添加选项" >
-            <ul>
-              <li v-for='(Option,index) in dynamicOptions' :key='Option' border>
-                {{Option}}  {{index}} <button @click='optionClose(Option)'>删除</button>
-              </li>
-            </ul>
-            <el-button  size="small" @click="addOption">添加选项</el-button>
-            <el-input
-              v-if="optionVisible"
-              v-model="optionValue"
-              ref="saveOptionInput"
-              size="small"
-              @keyup.enter.native="handleOptionConfirm"
-              @blur="handleOptionConfirm"
-            >
-            </el-input>
+              <el-input v-for='(option, index) in questionOptions' :key='index' v-model='questionOptions[index]' style="margin-bottom: 8px">
+              </el-input>
+            <el-button size="small" @click="addOption">添加选项</el-button>
           </el-form-item>
           <br>
           <el-form-item label="答案" prop="answer">
@@ -85,9 +73,10 @@
     data () {
       return {
         subjectOptions: [],
+        sort: [],
         knowledges: [],
         knowledgeOptions: [],
-        sort: [],
+        questionOptions: [],
         infoForm: {
           score: '',
           analysis: '',
@@ -115,6 +104,9 @@
       // 初始化
     },
     methods: {
+      addOption () {
+        this.questionOptions.push('');
+      },
       addNewList () {
         this.lists.push({
           id: this.nextTodoId++,
@@ -183,10 +175,11 @@
         this.infoForm.knowledge1 = this.knowledges[0];
         this.infoForm.knowledge2 = this.knowledges[1];
         this.infoForm.knowledge3 = this.knowledges[2];
-        this.infoForm.options = JSON.stringify(this.infoForm.options);
+        this.infoForm.options = JSON.stringify(this.questionOptions);
         this.infoForm.direction = this.sort[0]
         this.infoForm.subject = this.sort[1]
         this.$api.createQuestion(this.infoForm).then(res => {
+          this.questionOptions = [];
         }).catch((error) => {
           console.log(error);
           alert(error)

@@ -19,7 +19,7 @@
           </el-form-item>
           <br>
           <el-form-item style="margin:50px 100px; " label="添加选项" >
-              <el-input v-for='(option, index) in infoForm.options' :key='index' v-model='infoForm.options[index]' style="margin-bottom: 8px">
+              <el-input v-for='(option, index) in questionOptions' :key='index' v-model='questionOptions[index]' style="margin-bottom: 8px">
               </el-input>
             <el-button size="small" @click="addOption">添加选项</el-button>
           </el-form-item>
@@ -76,10 +76,11 @@
         sort: [],
         knowledges: [],
         knowledgeOptions: [],
+        questionOptions: [],
         infoForm: {
           score: '',
           analysis: '',
-          options: [],
+          options: '',
           content: '',
           uid: this.$store.state.user.userId,
           knowledge1: '',
@@ -104,7 +105,7 @@
     },
     methods: {
       addOption () {
-        this.infoForm.options.push('');
+        this.questionOptions.push('');
       },
       addNewList () {
         this.lists.push({
@@ -140,10 +141,11 @@
         this.infoForm.knowledge1 = this.knowledges[0];
         this.infoForm.knowledge2 = this.knowledges[1];
         this.infoForm.knowledge3 = this.knowledges[2];
-        this.infoForm.options = JSON.stringify(this.infoForm.options);
+        this.infoForm.options = JSON.stringify(this.questionOptions);
         this.infoForm.direction = this.sort[0];
         this.infoForm.subject = this.sort[1];
         this.$api.createQuestion(this.infoForm).then(res => {
+          this.questionOptions = [];
         }).catch((error) => {
           console.log(error);
           alert(error)
