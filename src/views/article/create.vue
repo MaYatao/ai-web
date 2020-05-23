@@ -15,7 +15,7 @@
           </el-form-item>
           <!--使用编辑器
           -->
-          <el-form-item label="详细" style="height: 250px;margin : 50px 100px">
+          <el-form-item label="详细" style="height: 350px;margin : 50px 100px">
             <div class="edit_container">
               <quill-editor
                 v-model="infoForm.content"
@@ -28,14 +28,21 @@
             </div>
           </el-form-item>
           <el-form-item label="科目" style="margin: 10px 60px">
-            <el-cascader :options="options" v-model="subjectId" clearable></el-cascader>
+            <el-cascader @change="getKnowledgesBySId" :options="subjectOptions" v-model="sort" clearable placeholder="请选择"></el-cascader>
           </el-form-item>
-          <el-form-item style="margin: 100px 100px; ">
-            <el-button class="button-new-tag" size="small" @click="showInput">添加知识点</el-button>
+          <el-form-item v-if="sort.length !== 0" label="知识点" style="margin: 30px 60px">
+            <el-select v-model="knowledges" multiple placeholder="请选择">
+              <el-option
+                v-for="item in knowledgeOptions"
+                :key="item.knowledgeId"
+                :label="item.title"
+                :value="item.knowledgeId"
+              ></el-option>
+            </el-select>
           </el-form-item>
           <el-form-item style="margin: 100px 100px">
-            <el-button type="primary" @click="onDraft">存为草稿</el-button>
-            <el-button type="primary" @click="onSubmit">确认发布</el-button>
+            <el-button type="primary" @click="onSubmit(1)">存为草稿</el-button>
+            <el-button type="primary" @click="onSubmit(0)">确认发布</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -48,16 +55,17 @@ import { quillEditor } from 'vue-quill-editor'; // 调用编辑器
 export default {
   data () {
     return {
-      dynamicTags: [],
-      inputVisible: false,
-      inputValue: '',
-      subjectId: '',
+      subjectOptions: [],
+      sort: [],
       knowledges: [],
-      options: [],
+      knowledgeOptions: [],
       infoForm: {
+        // 0：学习，1：话题
+        type: 0,
         title: '',
         content: '',
         userId: this.$store.state.user.userId,
+        // 话题
         topic: '',
         status: 0,
         comment: true
@@ -77,34 +85,33 @@ export default {
       this.$api
         .getSubjects()
         .then(res => {
-          this.options = res.data;
+          this.subjectOptions = res.data;
         })
         .catch(error => {
           console.log(error);
           alert(error);
         });
     },
-    handleClose (tag) {
-      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-    },
-
-    showInput () {
-      this.$api
-        .getKnowledgesBySId({ subjectId: this.subjectId[1] })
-        .then(res => {
-          this.knowledges = res.data;
-          this.dynamicTags = res.data;
-        })
-        .catch(error => {
-          console.log(error);
-          alert(error);
-        });
-    },
+    getKnowledgesBySId (values) {
+        this.knowledges = [];
+        this.$api.getKnowledgesBySId({ 'subjectId': values[1] })
+          .then(res => {
+            this.knowledgeOptions = res.data;
+          })
+          .catch(error => {
+            console.log(error);
+            alert(error);
+          });
+      },
     onEditorReady (editor) {},
-    onSubmit () {
+    onSubmit (status) {
       // 提交
-      this.infoForm.flag = this.dynamicTags.join();
-      this.infoForm.status = 0;
+      this.infoForm.status = status;
+      this.infoForm.knowledge1 = this.knowledges[0];
+      this.infoForm.knowledge2 = this.knowledges[1];
+      this.infoForm.knowledge3 = this.knowledges[2];
+      this.infoForm.direction = this.sort[0]
+      this.infoForm.subject = this.sort[1]
       this.$api
         .createArticle(this.infoForm)
         .then(res => {
@@ -113,19 +120,6 @@ export default {
         .catch(error => {
           console.log(error);
           alert(error);
-        });
-    },
-    onDraft () {
-      // 提交
-      this.infoForm.flag = this.dynamicTags.join();
-      this.infoForm.status = 1;
-      this.$api
-        .createArticle(this.infoForm)
-        .then(res => {
-          this.$router.push('/luntan');
-        })
-        .catch(error => {
-          console.log(error);
         });
     }
   },

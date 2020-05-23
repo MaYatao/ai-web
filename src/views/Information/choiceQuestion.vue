@@ -19,21 +19,9 @@
           </el-form-item>
           <br>
           <el-form-item style="margin:50px 100px; " label="添加选项" >
-            <ul>
-              <li v-for='(Option,index) in dynamicOptions' :key='Option' border>
-                {{Option}}  {{index}} <button @click='optionClose(Option)'>删除</button>
-              </li>
-            </ul>
-            <el-button  size="small" @click="addOption">添加选项</el-button>
-            <el-input
-              v-if="optionVisible"
-              v-model="optionValue"
-              ref="saveOptionInput"
-              size="small"
-              @keyup.enter.native="handleOptionConfirm"
-              @blur="handleOptionConfirm"
-            >
-            </el-input>
+              <el-input v-for='(option, index) in infoForm.options' :key='index' v-model='infoForm.options[index]' style="margin-bottom: 8px">
+              </el-input>
+            <el-button size="small" @click="addOption">添加选项</el-button>
           </el-form-item>
           <br>
           <el-form-item label="答案" prop="answer">
@@ -84,25 +72,20 @@
     name: 'choiceQuestion',
     data () {
       return {
-        optionVisible: false,
-        optionValue: '',
-        inputVisible: false,
-        inputValue: '',
-        subjectOptions: '',
+        subjectOptions: [],
         sort: [],
         knowledges: [],
         knowledgeOptions: [],
         infoForm: {
           score: '',
           analysis: '',
-          options: '',
+          options: [],
           content: '',
           uid: this.$store.state.user.userId,
           knowledge1: '',
           knowledge2: '',
           knowledge3: '',
           status: 0,
-          sort: [],
           subject: '',
           direction: '',
           answer: '',
@@ -120,12 +103,25 @@
       this.getSubject()
     },
     methods: {
+      addOption() {
+        this.infoForm.options.push('');
+      },
       addNewList () {
         this.lists.push({
           id: this.nextTodoId++,
           title: this.newAddText
         })
         this.newAddText = ''
+      },
+      onEditorReady (editor) {
+      },
+      getSubject () {
+        this.$api.getSubjects().then(res => {
+          this.subjectOptions = res.data;
+        }).catch((error) => {
+          console.log(error);
+          alert(error)
+        });
       },
       getKnowledgesBySId (values) {
         this.knowledges = [];
@@ -138,45 +134,15 @@
             alert(error);
           });
       },
-      showInput () {
-        this.inputVisible = true;
-        this.$nextTick(_ => {
-          this.$refs.saveTagInput.$refs.input.focus();
-        });
-      },
-      addOption () {
-        this.optionVisible = true;
-        this.$nextTick(_ => {
-          this.$refs.saveOptionInput.$refs.input.focus();
-        });
-      },
-      handleOptionConfirm () {
-        let optionValue = this.optionValue;
-        if (optionValue) {
-          this.dynamicOptions.push(optionValue);
-        }
-        this.optionVisible = false;
-        this.optionValue = '';
-      },
-      onEditorReady (editor) {
-      },
-      getSubject () {
-        this.$api.getSubjects().then(res => {
-          this.subjectOptions = res.data;
-        }).catch((error) => {
-          console.log(error);
-          alert(error)
-        });
-      },
       onSubmit () {
         // 提交
         // knowledges数组拆开为三个参数
         this.infoForm.knowledge1 = this.knowledges[0];
         this.infoForm.knowledge2 = this.knowledges[1];
         this.infoForm.knowledge3 = this.knowledges[2];
-        this.infoForm.options = this.dynamicOptions.join
-        this.infoForm.direction = this.sort[0]
-        this.infoForm.subject = this.sort[1]
+        this.infoForm.options = JSON.stringify(this.infoForm.options);
+        this.infoForm.direction = this.sort[0];
+        this.infoForm.subject = this.sort[1];
         this.$api.createQuestion(this.infoForm).then(res => {
         }).catch((error) => {
           console.log(error);

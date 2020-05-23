@@ -30,7 +30,6 @@ import questionList from '../views/Information/questionList'
 import testDone from '../views/Information/testDone'
 import choiceQuestion from '../views/Information/choiceQuestion'
 import choicesQuestion from '../views/Information/choicesQuestion'
-import ContentQuestion from '../views/Information/ContentQuestion'
 import informationIndex from '../views/Information/Index'
 import myInfo from '../views/Information/MyInfo'
 import myTests from '../views/Information/MyTests'
@@ -297,15 +296,6 @@ export default new Router({
               path: '/choicesQuestion',
               name: 'choicesQuestion',
               component: choicesQuestion,
-              meta: {
-                isLogin: true, // 是否登录
-                roles: ['学生', '教师'] // 是否登录
-              }
-            },
-            {
-              path: '/ContentQuestion',
-              name: 'ContentQuestion',
-              component: ContentQuestion,
               meta: {
                 isLogin: true, // 是否登录
                 roles: ['学生', '教师'] // 是否登录

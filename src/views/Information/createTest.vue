@@ -121,11 +121,9 @@
           direction: '',
           degree: 0
         },
-        contentQuestios: [],
         choiceQuestios: [],
         choicesQuestios: [],
         testForm: {
-          contentQuestios: '',
           choiceQuestios: '',
           choicesQuestios: '',
           count: 0,
@@ -156,9 +154,6 @@
         });
       },
       select (question) {
-        if (question.type === 0) {
-          this.contentQuestios.push(question.qid)
-        }
         if (question.type === 1) {
           this.choiceQuestios.push(question.qid)
         }
@@ -172,7 +167,6 @@
         alert(this.choiceQuestios.join())
         this.testForm.choiceQuestios = this.choiceQuestios.join()
         this.testForm.choicesQuestios = this.choicesQuestios.join()
-          this.testForm.contentQuestios = this.contentQuestios.join()
         this.$api.createTest(this.testForm).then(res => {
          alert(res.data)
         }).catch((error) => {
@@ -190,11 +184,6 @@
 <style scoped>
   .el-row {
     margin-bottom: 20px;
-
-  &
-  :last-child {
-    margin-bottom: 0;
-  }
 
   }
   .el-col {
