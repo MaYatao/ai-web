@@ -166,7 +166,7 @@ export function getCommentByCourseId (data) {
 }
 export function getSubjects () {
   return request({
-    url: '/course/getSubjects',
+    url: '/study/getSubjects',
     method: 'get'
   })
 }
