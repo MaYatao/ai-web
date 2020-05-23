@@ -103,7 +103,7 @@
       this.getSubject()
     },
     methods: {
-      addOption() {
+      addOption () {
         this.infoForm.options.push('');
       },
       addNewList () {
