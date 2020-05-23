@@ -114,40 +114,6 @@
         })
         this.newAddText = ''
       },
-      handleClose (tag) {
-        this.dynamicKnowledges.splice(this.dynamicKnowledges.indexOf(tag), 1);
-      },
-      optionClose (option) {
-        this.dynamicOptions.splice(this.dynamicOptions.indexOf(option), 1);
-      },
-      showInput () {
-        this.inputVisible = true;
-        this.$nextTick(_ => {
-          this.$refs.saveTagInput.$refs.input.focus();
-        });
-      },
-      addOption () {
-        this.optionVisible = true;
-        this.$nextTick(_ => {
-          this.$refs.saveOptionInput.$refs.input.focus();
-        });
-      },
-      handleInputConfirm () {
-        let inputValue = this.inputValue;
-        if (inputValue) {
-          this.dynamicKnowledges.push(inputValue);
-        }
-        this.inputVisible = false;
-        this.inputValue = '';
-      },
-      handleOptionConfirm () {
-        let optionValue = this.optionValue;
-        if (optionValue) {
-          this.dynamicOptions.push(optionValue);
-        }
-        this.optionVisible = false;
-        this.optionValue = '';
-      },
       onEditorReady (editor) {
       },
       getSubject () {
@@ -196,20 +162,5 @@
   }
 </script>
 <style>
-  .el-tag + .el-tag {
-    margin-left: 10px;
-  }
-  .button-new-tag {
-    margin-left: 10px;
-    height: 32px;
-    line-height: 30px;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .input-new-tag {
-    width: 90px;
-    margin-left: 10px;
-    vertical-align: bottom;
-  }
 </style>
 
