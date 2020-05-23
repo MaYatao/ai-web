@@ -162,7 +162,7 @@ export function getSubjects () {
 
 export function getKnowledgesBySId (data) {
   return request({
-    url: '/study/getKnowledgesBySId',
+    url: '/study/getKnowledgeBySId',
     method: 'post',
     params: {...data}
   })

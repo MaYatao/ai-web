@@ -44,36 +44,36 @@
 </template>
 
 <script>
-import { quillEditor } from "vue-quill-editor"; // 调用编辑器
+import { quillEditor } from 'vue-quill-editor'; // 调用编辑器
 export default {
-  data() {
+  data () {
     return {
       dynamicTags: [],
       inputVisible: false,
-      inputValue: "",
-      subjectId: "",
+      inputValue: '',
+      subjectId: '',
       knowledges: [],
       options: [],
       infoForm: {
-        title: "",
-        content: "",
+        title: '',
+        content: '',
         userId: this.$store.state.user.userId,
-        topic: "",
+        topic: '',
         status: 0,
         comment: true
       }
     };
   },
   computed: {
-    editor() {
+    editor () {
       return this.$refs.myQuillEditor.quill;
     }
   },
-  mounted() {
+  mounted () {
     this.getSubject();
   },
   methods: {
-    getSubject() {
+    getSubject () {
       this.$api
         .getSubjects()
         .then(res => {
@@ -84,11 +84,11 @@ export default {
           alert(error);
         });
     },
-    handleClose(tag) {
+    handleClose (tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
 
-    showInput() {
+    showInput () {
       this.$api
         .getKnowledgesBySId({ subjectId: this.subjectId[1] })
         .then(res => {
@@ -100,29 +100,29 @@ export default {
           alert(error);
         });
     },
-    onEditorReady(editor) {},
-    onSubmit() {
+    onEditorReady (editor) {},
+    onSubmit () {
       // 提交
       this.infoForm.flag = this.dynamicTags.join();
       this.infoForm.status = 0;
       this.$api
         .createArticle(this.infoForm)
         .then(res => {
-          this.$router.push("/luntan");
+          this.$router.push('/luntan');
         })
         .catch(error => {
           console.log(error);
           alert(error);
         });
     },
-    onDraft() {
+    onDraft () {
       // 提交
       this.infoForm.flag = this.dynamicTags.join();
       this.infoForm.status = 1;
       this.$api
         .createArticle(this.infoForm)
         .then(res => {
-          this.$router.push("/luntan");
+          this.$router.push('/luntan');
         })
         .catch(error => {
           console.log(error);

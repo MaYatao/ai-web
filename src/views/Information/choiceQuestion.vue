@@ -55,30 +55,18 @@
           <el-form-item label="难易程度" style="margin: 60px 60px">
             <el-rate v-model="infoForm.degree"></el-rate>
           </el-form-item>
-          <el-form-item label="科目"  style="margin: 10px 60px">
-            <el-cascader :options="subjectOptions" v-model="sort" clearable></el-cascader>
+          <el-form-item label="科目" style="margin: 30px 60px">
+            <el-cascader @change="getKnowledgesBySId" :options="subjectOptions" v-model="sort" clearable placeholder="请选择"></el-cascader>
           </el-form-item>
-          <el-form-item style="margin:50px 100px; " label="添加知识点" >
-            <br>
-            <el-tag
-              :key="tag"
-              v-for="tag in dynamicKnowledges"
-              closable
-              :disable-transitions="false"
-              @close="handleClose(tag)">
-              {{tag}}
-            </el-tag>
-            <el-input
-              class="input-new-tag"
-              v-if="inputVisible"
-              v-model="inputValue"
-              ref="saveTagInput"
-              size="small"
-              @keyup.enter.native="handleInputConfirm"
-              @blur="handleInputConfirm"
-            >
-            </el-input>
-            <el-button v-else class="button-new-tag" size="small" @click="showInput">添加新标签</el-button>
+          <el-form-item v-if="sort.length !== 0" label="知识点" style="margin: 30px 60px">
+            <el-select v-model="knowledges" multiple placeholder="请选择">
+              <el-option
+                v-for="item in knowledgeOptions"
+                :key="item.knowledgeId"
+                :label="item.title"
+                :value="item.knowledgeId"
+              ></el-option>
+            </el-select>
           </el-form-item>
           <el-form-item style="margin: 100px 100px" >
             <el-button type="primary" @click="onSubmit">确认发布</el-button>
@@ -96,20 +84,23 @@
     name: 'choiceQuestion',
     data () {
       return {
-        dynamicKnowledges: ['Java', '标签二', '标签三'],
-        dynamicOptions: [],
         optionVisible: false,
         optionValue: '',
         inputVisible: false,
         inputValue: '',
         subjectOptions: '',
+        sort: [],
+        knowledges: [],
+        knowledgeOptions: [],
         infoForm: {
           score: '',
           analysis: '',
           options: '',
           content: '',
           uid: this.$store.state.user.userId,
-          knowledge: '',
+          knowledge1: '',
+          knowledge2: '',
+          knowledge3: '',
           status: 0,
           sort: [],
           subject: '',
@@ -136,11 +127,16 @@
         })
         this.newAddText = ''
       },
-      handleClose (tag) {
-        this.dynamicKnowledges.splice(this.dynamicKnowledges.indexOf(tag), 1);
-      },
-      optionClose (option) {
-        this.dynamicOptions.splice(this.dynamicOptions.indexOf(option), 1);
+      getKnowledgesBySId (values) {
+        this.knowledges = [];
+        this.$api.getKnowledgesBySId({ 'subjectId': values[1] })
+          .then(res => {
+            this.knowledgeOptions = res.data;
+          })
+          .catch(error => {
+            console.log(error);
+            alert(error);
+          });
       },
       showInput () {
         this.inputVisible = true;
@@ -153,14 +149,6 @@
         this.$nextTick(_ => {
           this.$refs.saveOptionInput.$refs.input.focus();
         });
-      },
-      handleInputConfirm () {
-        let inputValue = this.inputValue;
-        if (inputValue) {
-          this.dynamicKnowledges.push(inputValue);
-        }
-        this.inputVisible = false;
-        this.inputValue = '';
       },
       handleOptionConfirm () {
         let optionValue = this.optionValue;
@@ -182,7 +170,10 @@
       },
       onSubmit () {
         // 提交
-        this.infoForm.knowledge = this.dynamicKnowledges.join()
+        // knowledges数组拆开为三个参数
+        this.infoForm.knowledge1 = this.knowledges[0];
+        this.infoForm.knowledge2 = this.knowledges[1];
+        this.infoForm.knowledge3 = this.knowledges[2];
         this.infoForm.options = this.dynamicOptions.join
         this.infoForm.direction = this.sort[0]
         this.infoForm.subject = this.sort[1]

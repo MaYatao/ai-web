@@ -104,21 +104,21 @@
 
 <script>
 export default {
-  name: "createCourse",
-  data() {
+  name: 'createCourse',
+  data () {
     return {
       sort: [],
       infoForm: {
         degree: 0,
-        title: "",
-        description: "",
+        title: '',
+        description: '',
         userId: this.$store.state.user.userId,
-        basics: "",
-        subject: "",
-        direction: "",
-        source: "",
-        url: "",
-        imageUrl: ""
+        basics: '',
+        subject: '',
+        direction: '',
+        source: '',
+        url: '',
+        imageUrl: ''
       },
       knowledges: [],
       fileList: [],
@@ -126,17 +126,17 @@ export default {
       subjectOptions: [],
       knowledgeOptions: [],
       videoFlag: false,
-      videoUploadPercent: "", // 是否显示进度条
+      videoUploadPercent: '', // 是否显示进度条
       // 进度条的进度，
       isShowUploadVideo: false,
       // 显示上传按钮
       videoForm: {
-        showVideoPath: ""
+        showVideoPath: ''
       }
     };
   },
   methods: {
-    getSubject() {
+    getSubject () {
       this.$api
         .getSubjects()
         .then(res => {
@@ -147,10 +147,9 @@ export default {
           alert(error);
         });
     },
-    getKnowledgesBySId(values) {
+    getKnowledgesBySId (values) {
       this.knowledges = [];
-      this.$api
-        .getKnowledgesBySId({ subjectId : values[1] })
+      this.$api.getKnowledgesBySId({ 'subjectId': values[1] })
         .then(res => {
           this.knowledgeOptions = res.data;
         })
@@ -159,48 +158,48 @@ export default {
           alert(error);
         });
     },
-    handleInputConfirm() {
+    handleInputConfirm () {
       let inputValue = this.inputValue;
       if (inputValue) {
         this.dynamicTags.push(inputValue);
       }
       this.inputVisible = false;
-      this.inputValue = "";
+      this.inputValue = '';
     },
     // 上传资料
-    handleChange(file, fileList) {
+    handleChange (file, fileList) {
       this.fileList = fileList;
     },
     // 上传前回调
-    beforeUploadVideo(file) {
+    beforeUploadVideo (file) {
       var fileSize = file.size / 1024 / 1024 < 500;
       if (
         [
-          "video/mp4",
-          "video/ogg",
-          "video/flv",
-          "video/avi",
-          "video/wmv",
-          "video/rmvb",
-          "video/mov"
+          'video/mp4',
+          'video/ogg',
+          'video/flv',
+          'video/avi',
+          'video/wmv',
+          'video/rmvb',
+          'video/mov'
         ].indexOf(file.type) === -1
       ) {
-        alert("请上传正确的视频格式");
+        alert('请上传正确的视频格式');
         return false;
       }
       if (!fileSize) {
-        alert("视频大小不能超过500MB");
+        alert('视频大小不能超过500MB');
         return false;
       }
       this.isShowUploadVideo = false;
     },
     // 进度条
-    uploadVideoProcess(event, file, fileList) {
+    uploadVideoProcess (event, file, fileList) {
       this.videoFlag = true;
       this.videoUploadPercent = file.percentage.toFixed(0) * 1;
     },
     // 上传成功回调
-    handleVideoSuccess(res, file) {
+    handleVideoSuccess (res, file) {
       this.isShowUploadVideo = true;
       this.videoFlag = false;
       this.videoUploadPercent = 0;
@@ -208,22 +207,22 @@ export default {
       this.videoForm.showVideoPath = res.data;
       this.infoForm.url = res.data;
     },
-    handleAvatarSuccess(res, file) {
+    handleAvatarSuccess (res, file) {
       this.infoForm.imageUrl = res.data;
     },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
+    beforeAvatarUpload (file) {
+      const isJPG = file.type === 'image/jpeg';
       const isLt2M = file.size / 1024 / 1024 < 5;
 
       if (!isJPG) {
-        this.$message.error("上传图片只能是 JPG 格式!");
+        this.$message.error('上传图片只能是 JPG 格式!');
       }
       if (!isLt2M) {
-        this.$message.error("上传图片大小不能超过 5MB!");
+        this.$message.error('上传图片大小不能超过 5MB!');
       }
       return isJPG && isLt2M;
     },
-    onSubmit() {
+    onSubmit () {
       // 提交
       for (let i = 0; i < this.fileList.length; i++) {
         this.sourceList.push(this.fileList[i].response.data);
@@ -232,9 +231,9 @@ export default {
       this.infoForm.direction = this.sort[0];
       this.infoForm.subject = this.sort[1];
       // knowledges数组拆开为三个参数
-      this.infoForm.knowledges1 = this.knowledges[0];
-      this.infoForm.knowledges2 = this.knowledges[1];
-      this.infoForm.knowledges3 = this.knowledges[2];
+      this.infoForm.knowledge1 = this.knowledges[0];
+      this.infoForm.knowledge2 = this.knowledges[1];
+      this.infoForm.knowledge3 = this.knowledges[2];
       this.$api
         .createCourse(this.infoForm)
         .then(res => {
@@ -246,7 +245,7 @@ export default {
         });
     }
   },
-  created() {
+  created () {
     this.getSubject();
   }
 };

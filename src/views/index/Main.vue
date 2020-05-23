@@ -174,8 +174,8 @@
 
 <script>
 export default {
-  name: "Main",
-  data() {
+  name: 'Main',
+  data () {
     return {
       imageList: null,
       listQuery: {
@@ -184,11 +184,11 @@ export default {
       }
     };
   },
-  created() {
+  created () {
     this.getImageList();
   },
   methods: {
-    getImageList() {
+    getImageList () {
       this.$api.getImage(this.listQuery).then(response => {
         this.imageList = response.data.list;
       });

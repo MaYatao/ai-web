@@ -75,27 +75,27 @@
 
 <script>
 export default {
-  name: "index",
-  data() {
+  name: 'index',
+  data () {
     return {
       user: this.$store.state.user,
       roles: this.$store.state.roles,
-      activeIndex: "/main",
-      content: ""
+      activeIndex: '/main',
+      content: ''
     };
   },
   methods: {
     // eslint-disable-next-line vue/no-dupe-keys
-    search() {
+    search () {
       this.$router.push({
-        path: "/search",
+        path: '/search',
         query: {
           content: this.content
         }
       });
     },
-    handleSelect(key, keyPath) {
-      if (key === "logout") {
+    handleSelect (key, keyPath) {
+      if (key === 'logout') {
         this.logout();
       } else {
         this.$router.push(key);
@@ -106,7 +106,7 @@ export default {
       this.indexs();
     }
   },
-  created() {
+  created () {
     // 自动加载indexs方法
     this.indexs();
   }
