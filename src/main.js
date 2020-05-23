@@ -39,6 +39,8 @@ Vue.config.productionTip = false
 // 安装路由
 Vue.use(VueRouter);
 
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

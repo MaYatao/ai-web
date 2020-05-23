@@ -106,7 +106,6 @@
     },
     created () {
       // 自动加载indexs方法
-      alert(0)
       this.indexs();
     }
   }

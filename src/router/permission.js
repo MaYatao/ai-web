@@ -5,10 +5,8 @@ router.beforeEach((to, from, next) => {
   let isLogin = store.state.isLogin
   if (isLogin === true) {
     let role = store.state.roles
-    alert(role.trim() === to.meta.roles[0].trim())
-    alert(role.trim() === to.meta.roles[1].trim())
     if (to.meta.isLogin) {
-      if (role.trim() === to.meta.roles[0].trim() || role.trim() === to.meta.roles[1].trim()) { /* 如果在有登录状态的情况下前往不需要权限的路由路径，则判定为退出登录，进行提示并跳转登录页 */
+      if (role + '' === to.meta.roles[0] + '' || role + '' === to.meta.roles[1] + '') { /* 如果在有登录状态的情况下前往不需要权限的路由路径，则判定为退出登录，进行提示并跳转登录页 */
         next()
       } else {
         alert('权限不够，请去登录')

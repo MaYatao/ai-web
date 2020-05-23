@@ -44,11 +44,6 @@
           <span>{{ scope.row.agree }}</span>
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="收藏" width="110">
-        <template slot-scope="scope">
-          <span>{{ scope.row.collection }}</span>
-        </template>
-      </el-table-column>
 
       <el-table-column align="center" label="操作" width="120">
         <template slot-scope="scope">

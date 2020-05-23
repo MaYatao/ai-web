@@ -218,7 +218,6 @@
           this.sourceList.push(this.fileList[i].response.data)
         }
         this.infoForm.source = this.sourceList.join()
-        alert(this.infoForm.source)
         this.infoForm.direction = this.sort[0]
         this.infoForm.subject = this.sort[1]
         this.infoForm.knowledges = this.dynamicTags.join()

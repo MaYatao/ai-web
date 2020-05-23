@@ -14,15 +14,15 @@
         <el-col :span="10">
           <div>
             <h3>{{data.title}}
-              <el-tag v-for="f in (data.flag.split(','))" v-bind:key=f v-bind:value=f>{{f}}</el-tag>
+            <!--  <el-tag v-for="f in (data.flag.split(','))" v-bind:key=f v-bind:value=f>{{f}}</el-tag>-->
             </h3>
           </div>
         </el-col>
-        <el-col :span="9">
+<!--        <el-col :span="9">
           <div class="grid-content bg-purple">
             <el-button type="success">已关注</el-button>
           </div>
-        </el-col>
+        </el-col>-->
       </el-row>
     </el-header>
     <el-main>
@@ -34,7 +34,6 @@
         <el-tag>发布时间：{{data.contentTime | filterTime}}</el-tag>
         <el-tag> 浏览量{{data.views}}</el-tag>
         <el-tag>点赞数:{{data.agree}}</el-tag>
-        <el-tag>评论数：{{data.collection}}</el-tag>
         <el-button :type="type" icon="el-icon-star-on"  @click="addCollection()"> 收藏</el-button>
         <el-button type="success" @click="showToggle" icon="el-icon-chat-dot-round"> 评论</el-button>
 

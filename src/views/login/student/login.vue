@@ -63,7 +63,7 @@
                 this.$router.push({ path: '/' });
               })
               .catch((error) => {
-                console.log(error);
+                alert(error);
               });
           } else {
             this.dialogVisible = true;
