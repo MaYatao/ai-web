@@ -1,63 +1,61 @@
 <template>
   <el-container>
-    <el-header>
+    <el-header style="height: initial">
       <el-row :gutter="20" style="margin: 10px">
         <el-col :span="2">
-          <div>方向</div>
+          <h3 class="tag-title">方向</h3>
         </el-col>
         <el-col :span="18">
-          <el-radio-group v-model="listQuery.direction">
-              <el-radio-button style="float: left" label="-1">全部</el-radio-button>
-              <el-radio-button style="float: left" v-for="direction in subjectList" :key="direction.value" :label=direction.value
-              >{{direction.label}}
+          <el-radio-group style="border-left: 1px solid #DCDFE6;" v-model="listQuery.direction">
+              <el-radio-button label="-1">全部</el-radio-button>
+              <el-radio-button v-for="direction in subjectList" :key="direction.value" :label="direction.value">
+                {{direction.label}}
               </el-radio-button>
           </el-radio-group>
         </el-col>
       </el-row>
       <el-row :gutter="20" style="margin: 10px">
         <el-col :span="2">
-          <div>科目</div>
+          <h3 class="tag-title">科目</h3>
         </el-col>
         <el-col :span="18">
-          <el-radio-group v-model="listQuery.subject">
-              <el-radio-button label="-1" style="float: left">全部</el-radio-button>
-              <div  v-for="direction in subjectList" :key="direction" >
-                <el-radio-button style="float: left" v-for=" subject in direction.children" :key="subject.value"  v-show =" subject.value >30 ? false :true" :label=subject.value >{{subject.label}}
+          <el-radio-group style="border-left: 1px solid #DCDFE6;" v-model="listQuery.subject">
+              <el-radio-button label="-1">全部</el-radio-button>
+              <template v-for="direction in subjectList">
+                <el-radio-button v-for=" subject in direction.children" :key="subject.value"  v-show =" subject.value >30 ? false :true" :label="subject.value" >{{subject.label}}
                 </el-radio-button>
-              </div>
-            <el-radio-button style="float: left">更多...
-            </el-radio-button>
+              </template>
+            <el-radio-button>更多...</el-radio-button>
           </el-radio-group>
         </el-col>
       </el-row>
       <el-row :gutter="20" style="margin: 10px">
         <el-col :span="2">
-          <div>难度</div>
+          <h3 class="tag-title">难度</h3>
         </el-col>
-        <el-col :span="18" >
-            <el-radio-group v-model="listQuery.degree" style="float: left">
-                <el-radio-button style="float: left" v-for="degree in degrees" :key="degree.value" :label=degree.value>{{degree.label}}
+        <el-col :span="18" style="text-align: left">
+            <el-radio-group style="border-left: 1px solid #DCDFE6;" v-model="listQuery.degree">
+                <el-radio-button v-for="degree in degrees" :key="degree.value" :label="degree.value">
+                  {{degree.label}}
                 </el-radio-button>
             </el-radio-group>
         </el-col>
       </el-row>
     </el-header>
-    <el-main style="margin: 150px 100px">
+    <el-main style="margin: 20px 100px">
       <el-container>
-        <el-header>
-          <h1 style="float: left">
-            <el-tag> 最热</el-tag>
-            <el-tag> 最新</el-tag>
-          </h1>
+        <el-header style="text-align: left">
+            <el-tag>最热</el-tag>
+            <el-tag>最新</el-tag>
         </el-header>
-        <el-main>
+        <el-main style="height: 400px">
           <div v-for="course in courseList" :key="course">
-            <div style="height: 250px;width:200px;float: left;margin: 10px">
-              <a  @click="getCourseById(course.courseId)">
-              <el-image :src=course.imageUrl></el-image>
-              {{course.title}}
-              <el-rate v-model="course.degree"></el-rate>
-              {{course.description}}
+            <div style="height: 250px; width:200px; float: left; margin: 10px; overflow: hidden">
+              <a style="cursor-pointer" @click="getCourseById(course.courseId)">
+                <el-image style="border-radius: 10px" :src="course.imageUrl"></el-image>
+                <h3>{{course.title}}</h3>
+                <el-rate v-model="course.degree"></el-rate>
+                <div style="font-size: 14px; color:#545C63; margin-top: 10px">{{course.description}}</div>
               </a>
             </div>
           </div>
@@ -120,12 +118,6 @@
 <style scoped>
   .el-row {
     margin-bottom: 20px;
-
-  &
-  :last-child {
-    margin-bottom: 0;
-  }
-
   }
   .el-col {
     border-radius: 4px;
@@ -161,5 +153,12 @@
     text-align: center;
     text-decoration: none;
     padding: 0px
+  }
+  .tag-title {
+    margin: 10px 0 0;
+  }
+
+  .el-radio-group {
+    text-align: left;
   }
 </style>
