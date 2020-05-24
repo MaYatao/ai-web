@@ -3,9 +3,11 @@
     <el-header :style="{backgroundImage: 'url(' + infoForm.imageUrl + ')', backgroundSize:'cover'}">
       <el-row style="color: white ">
         <el-col :span="8">
-          <h3>{{infoForm.title}}
-            <el-tag v-for="f in (infoForm.knowledges.split(','))" v-bind:key=f v-bind:value=f>{{f}}</el-tag>
-          </h3>
+          <h1>{{infoForm.title}}
+            <el-tag >{{infoForm.knowledge1}}</el-tag>
+            <el-tag >{{infoForm.knowledge2}}</el-tag>
+            <el-tag >{{infoForm.knowledge3}}</el-tag>
+          </h1>
         </el-col>
         <el-col :span="12">
           <el-button type="primary">收藏</el-button>
@@ -37,12 +39,12 @@
       <el-container style="margin: 50px">
         <br><br>
         <el-header>
-          课程简介： {{infoForm.description}}
-          课程基础： {{infoForm.basics}}
-          课程目标：{{infoForm.goal}}
+         <h1> 课程简介：</h1> {{infoForm.description}}
+          <h1>课程基础</h1>： {{infoForm.basics}}
+          <h1>课程目标：</h1>{{infoForm.goal}}
         </el-header>
         <el-main>
-          资料下载：{{infoForm.source}}
+        <a >   资料下载</a>
         </el-main>
       </el-container>
     </el-main>
@@ -93,20 +95,22 @@
         commentText: '',
         activeName: 'first',
         infoForm: {
-          courseId: '',
-          title: '',
-          description: '',
-          basics: '',
-          goal: '',
-          knowledges: '',
-          url: '',
-          source: '',
-          imageUrl: '',
-          uploadTime: '',
-          userId: '',
-          direction: '',
-          degree: '',
-          subject: ''
+          courseId: 3,
+          title: 'Java入门第一季',
+          description: '本教程为Java入门第一季，欢迎来到精彩的Java编程世界！Java语言已经成为当前软件开发行业中主流的开发语言。本教程将介绍Java环境搭建、工具使用、基础语法。带领大家一步一步的踏入Java达人殿堂！Let’s go!',
+          basics: '0基础',
+          goal: '学习大神',
+          url: 'http://192.168.183.130/group1/M00/00/00/wKi3gl7JK6-ANYLmAABUA67-KI8345.mp4',
+          imageUrl: 'http://192.168.183.130/group1/M00/00/00/wKi3gl7JK7uAMjf9AACJTjs7_vA018.jpg',
+          createTime: '2020-05-23 21:57:23',
+          userId: 1,
+          username: null,
+          direction: 2,
+          degree: 3,
+          subject: 27,
+          knowledge1: 1,
+          knowledge3: 3,
+          knowledge2: 2
         },
         comments: {}
       };

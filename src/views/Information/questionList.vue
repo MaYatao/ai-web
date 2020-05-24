@@ -56,7 +56,7 @@
           testId: '',
           userId: '',
           title: '',
-          status: 0
+          degree: 0
         },
         infoForm: {
           qid: '',
@@ -67,7 +67,7 @@
           subject: '',
           direction: '',
           answer: '',
-          degree: 0,
+          degree: '',
           type: 1
         },
         answers: [],
@@ -94,6 +94,7 @@
           'questionList': this.questionList,
           'userId': this.$store.state.user.userId,
           'testId': this.testForm.testId,
+          'degree': this.testForm.degree,
           'title': this.testForm.title,
           'status': this.testForm.status,
           'spendTime': spendTime

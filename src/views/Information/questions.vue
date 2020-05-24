@@ -18,7 +18,7 @@
           <el-col :span="2">选择试题数：</el-col>
           <el-col :span="4" >
             <el-radio-group v-model="form.num">
-            <el-radio-button label=10></el-radio-button>
+            <el-radio-button label=10 ></el-radio-button>
             <el-radio-button label=20></el-radio-button>
             <el-radio-button label=30></el-radio-button>
           </el-radio-group></el-col>
@@ -44,7 +44,7 @@
           subjectIds: '',
           num: 10,
           userId: this.$store.state.user.userId,
-          degree: 1,
+          degree: 0,
           types: []
         },
         subjectList: '',

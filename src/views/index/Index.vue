@@ -94,6 +94,9 @@ export default {
         }
       });
     },
+    indexs () {
+      this.$router.push('/main')
+    },
     handleSelect (key, keyPath) {
       if (key === 'logout') {
         this.logout();

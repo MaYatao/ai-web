@@ -59,7 +59,7 @@
             <div class="pic_img_box">
               <el-upload
                 class="avatar-uploader"
-                action="http://127.0.0.1:10010/api/manage/uploadFile"
+               action="http://47.98.243.161:41412/api/manage/uploadFile"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload">

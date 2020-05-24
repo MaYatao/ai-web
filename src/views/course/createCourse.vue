@@ -36,7 +36,7 @@
             <div class="pic_img_box">
               <el-upload
                 class="avatar-uploader"
-                action="http://127.0.0.1:10010/api/manage/uploadFile"
+               action="http://47.98.243.161:41412/api/manage/uploadFile"
                 v-bind:data="{FoldPath:'上传目录'}"
                 v-bind:on-progress="uploadVideoProcess"
                 v-bind:on-success="handleVideoSuccess"
@@ -72,7 +72,7 @@
             <div class="pic_img_box">
               <el-upload
                 class="avatar-uploader"
-                action="http://127.0.0.1:10010/api/manage/uploadFile"
+               action="http://47.98.243.161:41412/api/manage/uploadFile"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
@@ -86,7 +86,7 @@
         <el-form-item style="margin: 100px 100px">
           <el-upload
             class="upload-demo"
-            action="http://127.0.0.1:10010/api/manage/uploadFile"
+           action="http://47.98.243.161:41412/api/manage/uploadFile"
             :on-change="handleChange"
             :file-list="fileList"
           >
@@ -112,6 +112,7 @@ export default {
         degree: 0,
         title: '',
         description: '',
+        username: this.$store.state.user.username,
         userId: this.$store.state.user.userId,
         basics: '',
         subject: '',

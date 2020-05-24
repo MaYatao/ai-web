@@ -13,7 +13,7 @@
         <div style="height: 250px;width:200px;float: left;margin: 10px">
           <el-image :src="'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'"></el-image>
           {{test.title}}
-          <el-rate v-model="test.status" :colors="colors"></el-rate>
+          <el-rate v-model="test.degree" :colors="colors"></el-rate>
         </div>
         </a>
       </div>
