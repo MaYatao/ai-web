@@ -17,7 +17,7 @@
             <el-tag  v-if="!message.status" type="danger">未读</el-tag>
             {{message.fromUserName}} {{message.title}}    {{message.sentTime}}
             <p  style="align-content: center" v-html="message.content"></p>
-            <el-button type="primary"  @click="look(message.messagesId)">查看</el-button>
+            <el-button type="primary"  @click="look(message)">查看</el-button>
             <el-button type="primary"  @click="deleteMessage(message.messagesId)">删除</el-button>
           </div>
         </el-row>
@@ -57,12 +57,18 @@
           this.total = response.data.total
         })
       },
-      look (messagesId) {
-        this.$api.editMessageById({'messagesId': messagesId}).then(response => {
-          // eslint-disable-next-line handle-callback-err
-        }).catch((error) => {
-          this.$message.error('错了哦，这是一条错误消息');
-        });
+      look (message) {
+        this.$api.editMessageById({'messagesId': message.messagesId}).then(response => {
+          this.$alert(message.content, message.title, {
+            confirmButtonText: '确定',
+            callback: action => {
+              this.$message({
+                type: 'info',
+                message: `查看成功`
+              });
+            }
+          })
+          })
       },
       deleteMessage (messagesId) {
         this.$api.deleteMessageById({'messagesId': messagesId}).then(response => {

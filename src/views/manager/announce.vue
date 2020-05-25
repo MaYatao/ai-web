@@ -52,7 +52,7 @@
         <el-form-item label="公告标题" prop="title">
           <el-input style="width: 200px" v-model="infoForm.title" placeholder="公告标题"></el-input>
         </el-form-item>
-      <el-form-item label="公告标题" prop="content">
+      <el-form-item label="公告内容" prop="content">
         <el-input style="width: 200px" v-model="infoForm.content" placeholder="公告"></el-input>
       </el-form-item>
           <el-form-item label="公告标题" prop="toUser">

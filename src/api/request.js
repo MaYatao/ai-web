@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'http://47.98.243.161:41412/api/', // api的base_url
+  baseURL: 'http://38g0cc583.nat123.fun:23978/api/', // api的base_url
   timeout: 10000 // 请求超时时间
   // transformRequest: data => qs.stringify(data) //
 })
