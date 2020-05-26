@@ -36,7 +36,7 @@
             <div class="pic_img_box">
               <el-upload
                 class="avatar-uploader"
-               action="http://38g0cc583.nat123.fun:23978/api/manage/uploadFile"
+               action="http://94.191.70.63:23978/api/manage/uploadFile"
                 v-bind:data="{FoldPath:'上传目录'}"
                 v-bind:on-progress="uploadVideoProcess"
                 v-bind:on-success="handleVideoSuccess"
@@ -72,7 +72,7 @@
             <div class="pic_img_box">
               <el-upload
                 class="avatar-uploader"
-               action="http://38g0cc583.nat123.fun:23978/api/manage/uploadFile"
+               action="http://94.191.70.63:23978/api/manage/uploadFile"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
@@ -86,7 +86,7 @@
         <el-form-item style="margin: 100px 100px">
           <el-upload
             class="upload-demo"
-           action="http://38g0cc583.nat123.fun:23978/api/manage/uploadFile"
+           action="http://94.191.70.63:23978/api/manage/uploadFile"
             :on-change="handleChange"
             :file-list="fileList"
           >
