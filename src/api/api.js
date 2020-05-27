@@ -218,6 +218,16 @@ export function searchQuestion (data) {
     params: {...data}
   })
 }
+
+export function search (data) {
+  return request({
+    url: '/study/search',
+    method: 'post',
+    params: {...data}
+  })
+}
+
+
 export function getHotTests (data) {
   return request({
     url: '/question/getHotTestList',
