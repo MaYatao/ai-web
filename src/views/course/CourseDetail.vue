@@ -34,7 +34,7 @@
     <el-footer>
       <el-row v-for="commentResult in comments" v-bind:key="commentResult">
         <el-col :span="4">
-          <div class="demo-basic--circle">
+          <div>
             <div class="block">
             </div>
           </div>
