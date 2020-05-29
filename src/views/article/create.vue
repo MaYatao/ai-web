@@ -2,20 +2,24 @@
   <div>
     <el-row class="warp">
       <h1>发布/修改文章</h1>
-
       <!--
       Form 组件提供了表单验证的功能，只需要通过 rule 属性传入约定的验证规则，并 Form-Item 的 prop 属性设置为需校验的字段名即可。具体可以参考官网：http:// element.eleme.io/#/zh-CN/component/form
       -->
-      <el-col :span="24" class="warp-main">
+      <el-col :span="18" :offset="3" class="warp-main" style="text-align: left">
         <el-form ref="infoForm" :model="infoForm" label-width="120px">
-          是否开启评论
-          <el-switch v-model="infoForm.comment" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
-          <el-form-item label="标题" prop="title" style="margin: 50px 100px">
+          <el-form-item label="是否开启评论：">
+            <el-switch v-model="infoForm.comment" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+          </el-form-item>
+          <el-form-item label="类型：">
+            <el-radio v-model="infoForm.type" :label="0">学习</el-radio>
+            <el-radio v-model="infoForm.type" :label="1">话题</el-radio>
+          </el-form-item>
+          <el-form-item label="标题：" prop="title">
             <el-input v-model="infoForm.title"></el-input>
           </el-form-item>
           <!--使用编辑器
           -->
-          <el-form-item label="详细" style="height: 350px;margin : 50px 100px">
+          <el-form-item label="详细：" style="height: 350px">
             <div class="edit_container">
               <quill-editor
                 v-model="infoForm.content"
@@ -27,11 +31,14 @@
               ></quill-editor>
             </div>
           </el-form-item>
-          <el-form-item label="科目" style="margin: 10px 60px">
-            <el-cascader @change="getKnowledgesBySId" :options="subjectOptions" v-model="sort" clearable placeholder="请选择"></el-cascader>
+          <el-form-item v-if="infoForm.type === 1" label="话题：">
+            <el-input v-model="infoForm.topic" style="width: 280px"></el-input>
           </el-form-item>
-          <el-form-item v-if="sort.length !== 0" label="知识点" style="margin: 30px 60px">
-            <el-select v-model="knowledges" multiple placeholder="请选择">
+          <el-form-item v-if="infoForm.type === 0" label="科目：">
+            <el-cascader @change="getKnowledgesBySId" :options="subjectOptions" v-model="sort" clearable placeholder="请选择"  style="width: 280px"></el-cascader>
+          </el-form-item>
+          <el-form-item v-if="sort.length !== 0" label="知识点：">
+            <el-select v-model="knowledges" multiple placeholder="请选择" style="width: 280px">
               <el-option
                 v-for="item in knowledgeOptions"
                 :key="item.knowledgeId"
@@ -40,8 +47,8 @@
               ></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item style="margin: 100px 100px">
-            <el-button type="primary" @click="onSubmit(1)">存为草稿</el-button>
+          <el-form-item style="margin: 100px 0; text-align: center">
+            <el-button @click="onSubmit(1)">存为草稿</el-button>
             <el-button type="primary" @click="onSubmit(0)">确认发布</el-button>
           </el-form-item>
         </el-form>

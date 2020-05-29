@@ -18,17 +18,28 @@
             </div>
           </el-form-item>
           <br>
-          <el-form-item style="margin:50px 100px; " label="添加选项" >
-              <el-input v-for='(option, index) in questionOptions' :key='index' v-model='questionOptions[index]' style="margin-bottom: 8px">
-              </el-input>
+          <el-form-item style="margin:80px 100px 20px;" label="添加选项">
+            <div
+              :key="index"
+              v-for="(option, index) in questionOptions"
+              style="display: flex; justify-content: center"
+            >
+              <div style="flex: 0 0 100px; text-align: right; padding-right: 10px; color: #b3b6b9">选项{{index + 1}}:</div>
+              <el-input v-model="questionOptions[index]" style="margin-bottom: 8px"></el-input>
+            </div>
             <el-button size="small" @click="addOption">添加选项</el-button>
           </el-form-item>
           <br>
-          <el-form-item label="答案" prop="answer">
-            <el-input v-model="infoForm.answer"></el-input>
+          <el-form-item v-if="questionOptions.length > 0" label="答案" style="margin:0 100px 20px;">
+            <el-radio
+              v-for="(option, index) in questionOptions"
+              :key="index"
+              v-model="infoForm.answer"
+              :label="index"
+            >选项{{index + 1}}</el-radio>
           </el-form-item>
-          <el-form-item label="分值" prop="score">
-            <el-input v-model="infoForm.score"></el-input>
+          <el-form-item label="分值" prop="score" style="margin: 0 100px">
+            <el-input v-model="infoForm.score" style="width: 200px"></el-input>
           </el-form-item>
           <el-form-item label="解析"   style="height: 250px;margin : 30px 100px">
             <div class="edit_container">
@@ -40,7 +51,7 @@
             </div>
           </el-form-item>
           <br>
-          <el-form-item label="难易程度" style="margin: 60px 60px">
+          <el-form-item label="难易程度" style="margin: 80px 60px 0">
             <el-rate v-model="infoForm.degree"></el-rate>
           </el-form-item>
           <el-form-item label="科目" style="margin: 30px 60px">
