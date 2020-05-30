@@ -82,6 +82,8 @@
       select (index) {
         this.current = index
         this.infoForm = this.questionList[index]
+        let str = this.infoForm.options
+        this.infoForm.options = str.substr(1, (str.length - 2));
         if (this.infoForm.type === 2) {
           this.answers = this.infoForm.answer
           this.userAnswers = this.infoForm.userAnswer.split(',')

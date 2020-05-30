@@ -9,18 +9,18 @@
   </el-tabs>
 </template>
 <script>
-import questions from "@/views/Information/questions";
-import tests from "@/views/Information/tests";
+import questions from '@/views/Information/questions';
+import tests from '@/views/Information/tests';
 export default {
-  name: "Index",
+  name: 'Index',
   components: { questions, tests },
-  data() {
+  data () {
     return {
-      activeName: "first"
+      activeName: 'first'
     };
   },
   methods: {
-    handleClick(tab, event) {
+    handleClick (tab, event) {
       console.log(tab, event);
     }
   }

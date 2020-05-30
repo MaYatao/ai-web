@@ -59,13 +59,13 @@
         // 为表单绑定验证功能
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$api.login(this.form)
-              .then((res) => {
-                console.log(res)
+            // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
+            this.$store.dispatch('Login', this.form)
+              .then(() => {
                 this.$router.push({ path: '/' });
               })
               .catch((error) => {
-                console.log(error);
+                alert(error);
               });
           } else {
             this.dialogVisible = true;

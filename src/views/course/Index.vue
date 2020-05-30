@@ -55,7 +55,7 @@
                 <el-image style="border-radius: 10px" :src="course.imageUrl"></el-image>
                 <h3>{{course.title}}</h3>
                 <el-rate v-model="course.degree"></el-rate>
-                <div style="font-size: 14px; color:#545C63; margin-top: 10px">{{course.description}}</div>
+                <div style="font-size: 14px; color:#545C63; margin-top: 35px">{{course.description}}</div>
               </a>
             </div>
           </div>

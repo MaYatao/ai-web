@@ -25,38 +25,38 @@
 <script>
 // import __ from '__' // __是需要手动引入的文件
 export default {
-  name: "userInfo",
+  name: 'userInfo',
   components: {},
   filters: {
-    statusFilter(status) {
+    statusFilter (status) {
       const statusMap = {
-        "0": "学生",
-        "1": "教师",
-        "2": "管理员"
+        '0': '学生',
+        '1': '教师',
+        '2': '管理员'
       };
       return statusMap[status];
     }
   },
-  data() {
+  data () {
     return {
       infoForm: {
-        username: "",
-        headImage: "",
-        birthday: "",
+        username: '',
+        headImage: '',
+        birthday: '',
         sex: false,
-        school: "",
+        school: '',
         identity: 0,
-        expectation: "",
-        description: "",
+        expectation: '',
+        description: '',
         userId: this.$store.state.user.userId
       }
     };
   },
-  created() {
+  created () {
     this.getUserById();
   },
   methods: {
-    getUserById() {
+    getUserById () {
       this.$api
         .getUserById({ userId: this.infoForm.userId })
         .then(response => {

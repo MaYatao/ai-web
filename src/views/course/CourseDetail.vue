@@ -1,36 +1,36 @@
 <template>
   <el-container>
-      <!--在视频外面加一个容器-->
-      <el-row>
-        <h1>学习页面</h1>
-        <div class='demo'>
-          <video-player class="video-player vjs-custom-skin"
-                        ref="videoPlayer"
-                        :playsinline="true"
-                        :options="playerOptions">
-          </video-player>
-        </div>
-      </el-row>
+    <!--在视频外面加一个容器-->
+    <el-row>
+      <h1>学习页面</h1>
+      <div class='demo'>
+        <video-player class="video-player vjs-custom-skin"
+                      ref="videoPlayer"
+                      :playsinline="true"
+                      :options="playerOptions">
+        </video-player>
+      </div>
+    </el-row>
     <br>
     <br>
-      <el-row>
+    <el-row>
       <el-button :type="type" icon="el-icon-star-on" @click="addCollection()"> 收藏</el-button>
       <el-button type="success" @click="showToggle" icon="el-icon-chat-dot-round"> 评论</el-button>
-      </el-row>
-      <el-row :gutter="20" v-show="isShow">
-        <el-col :span="16">
-          <div class="edit_container">
-            <quill-editor v-model="commentText"
-                          ref="myQuillEditor"
-                          class="editer"
-                          :options="editorOption" @ready="onEditorReady($event) " style="height: 100px">
-            </quill-editor>
-          </div>
-        </el-col>
-        <el-col :span="8">
-          <el-button type="success" @click="saveComment"> 确定</el-button>
-        </el-col>
-      </el-row>
+    </el-row>
+    <el-row :gutter="20" v-show="isShow">
+      <el-col :span="16">
+        <div class="edit_container">
+          <quill-editor v-model="commentText"
+                        ref="myQuillEditor"
+                        class="editer"
+                        :options="editorOption" @ready="onEditorReady($event) " style="height: 100px">
+          </quill-editor>
+        </div>
+      </el-col>
+      <el-col :span="8">
+        <el-button type="success" @click="saveComment"> 确定</el-button>
+      </el-col>
+    </el-row>
     <el-footer>
       <el-row v-for="commentResult in comments" v-bind:key="commentResult">
         <el-col :span="4">
@@ -100,7 +100,6 @@
           description: '',
           basics: '',
           goal: '',
-          knowledges: '',
           url: '',
           source: '',
           imageUrl: '',
@@ -144,7 +143,7 @@
             // 类型
             type: 'video/mp4',
             // url地址
-            src: ''
+            src: 'http://192.168.183.130/group1/M00/00/00/wKi3gl7RNV2ALTqGAX20ADYYRys934.avi'
           }],
           // 你的封面地址
           poster: '',
@@ -171,10 +170,11 @@
         this.courseId = this.$route.query.courseId
       },
       getCourseById () {
-        this.$api.getCourseById({'courseId': this.courseId})
+        this.$api.CourseById({'courseId': this.courseId})
           .then(response => {
             this.infoForm = response.data
-            this.playerOptions.sources[0].src = this.infoForm.url
+            this.playerOptions.sources[0].src = 'http://192.168.183.130/group1/M00/00/00/wKi3gl7RNV2ALTqGAX20ADYYRys934.avi'
+            alert(this.playerOptions.sources[0].src)
           }).catch((error) => {
           console.log(error);
         });

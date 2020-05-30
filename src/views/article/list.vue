@@ -21,7 +21,7 @@
 
       <el-table-column width="180px" align="center" label="发表时间">
         <template slot-scope="scope">
-          <span>{{ scope.row.contentTime | parseTime('{Y}-{M}-{D} {h}:{m}:{s}') }}</span>
+          <span>{{ scope.row.createTime | parseTime('{Y}-{M}-{D} {h}:{m}:{s}') }}</span>
         </template>
       </el-table-column>
 

@@ -10,7 +10,7 @@
           <el-button type="primary" icon="el-icon-search" @click="table = true">创建试题</el-button>
         </el-col>
         <el-col :span="5">
-          <el-rate v-model="testForm.status"></el-rate>
+          <el-rate v-model="testForm.degree"></el-rate>
         </el-col>
         <el-col :span="5">
          题目数量{{testForm.count}}
@@ -71,16 +71,21 @@
         <el-form-item label="选择难度" >
           <el-rate v-model="searchList.degree"></el-rate>
         </el-form-item>
-        <el-form-item label="搜索知识点" prop="knowledge">
-          <el-input style="width: 200px" v-model="searchList.knowledge" placeholder="搜索知识点"></el-input>
-        </el-form-item>
         <el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
       </el-form>
       <el-table :data="gridData">
-        <el-table-column property="title" label="题目" width="150"></el-table-column>
-        <el-table-column property="type" label="题型" width="200"></el-table-column>
+        <el-table-column  label="题目" width="150" >
+          <template slot-scope="{row}">
+           <div v-html="row.content"></div>
+          </template>
+        </el-table-column>
+        <el-table-column label="题型" width="200"> <template slot-scope="{row}">
+          <el-tag  >
+            {{row.type | typeFilter}}
+          </el-tag>
+        </template></el-table-column>
         <el-table-column label="难度">           <template slot-scope="scope"><el-rate v-model="scope.row.degree"></el-rate>  </template></el-table-column>
-        <el-table-column property="knowledge" label="知识点"></el-table-column>
+        <el-table-column property="knowledgeName" label="知识点"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button type="primary" icon="el-icon-search" @click="select(scope.row)">确定</el-button>
@@ -101,7 +106,6 @@
     filters: {
       typeFilter (type) {
         const typeMap = {
-          '0': '内容题',
           '1': '单选题',
           '2': '多选题'
         }
@@ -127,7 +131,8 @@
           choiceQuestios: '',
           choicesQuestios: '',
           count: 0,
-          status: 0,
+          degree: 0,
+          subjectId: '',
           title: '',
           type: 1,
           userId: this.$store.state.user.userId
@@ -144,6 +149,7 @@
         });
       },
       search () {
+        this.testForm.subject = this.sort[1]
         this.searchList.direction = this.sort[0]
         this.searchList.subject = this.sort[1]
         this.$api.searchQuestion(this.searchList).then(res => {
@@ -164,11 +170,10 @@
         this.testForm.count = this.tableData.length
       },
       save () {
-        alert(this.choiceQuestios.join())
         this.testForm.choiceQuestios = this.choiceQuestios.join()
         this.testForm.choicesQuestios = this.choicesQuestios.join()
         this.$api.createTest(this.testForm).then(res => {
-         alert(res.data)
+          alert('创建成功')
         }).catch((error) => {
           console.log(error);
           alert(error)

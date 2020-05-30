@@ -9,7 +9,7 @@
         <el-form-item prop="infoForm.headImage" label="头像">
               <el-upload
                 class="avatar-uploader"
-               action="http://94.191.70.63:23978/api/manage/uploadFile"
+               action="http://127.0.0.1:10010/api/manage/uploadFile"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload">

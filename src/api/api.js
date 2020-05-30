@@ -26,6 +26,14 @@ import request from './request'
     })
   }
 
+export function teacherRegister (data) {
+  return request({
+    url: '/user/teacher/register',
+    method: 'post',
+    params: { ...data }
+  })
+}
+
 export function editUser (data) {
   return request({
     url: '/user/editUser',
@@ -101,6 +109,7 @@ export function getArticleByUId (data) {
   })
 }
 
+
 /**
  *
  * @param 访问者，作者，文章id
@@ -159,6 +168,21 @@ export function getSubjects () {
     method: 'get'
   })
 }
+export function getByPId (data) {
+  return request({
+    url: '/study/getByPId',
+    method: 'post',
+    params: {...data}
+  })
+}
+
+export function getBySid (data) {
+  return request({
+    url: '/study/getBySid',
+    method: 'post',
+    params: {...data}
+  })
+}
 
 export function getKnowledgesBySId (data) {
   return request({
@@ -183,6 +207,21 @@ export function getCoursesByType (data) {
     params: {...data}
   })
 }
+
+export function getCourseByUid (data) {
+  return request({
+    url: '/course/getCourseByUid',
+    method: 'post',
+    params: {...data}
+  })
+}
+export function getMyCourseByUid (data) {
+  return request({
+    url: '/course/getMyCourseByUid',
+    method: 'post',
+    params: {...data}
+  })
+}
 export function getCourseById (data) {
   return request({
     url: '/course/getCourseById',
@@ -190,6 +229,7 @@ export function getCourseById (data) {
     params: {...data}
   })
 }
+
 
 /**
  *题库

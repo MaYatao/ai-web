@@ -47,33 +47,33 @@
 
 <script>
 export default {
-  name: "questions",
-  data() {
+  name: 'questions',
+  data () {
     return {
       form: {
-        subjectIds: "",
+        subjectIds: '',
         num: 10,
         userId: this.$store.state.user.userId,
         degree: 0,
         types: []
       },
-      subjectList: "",
+      subjectList: '',
       subjests: [],
       questionsTypes: []
     };
   },
-  created() {
+  created () {
     this.getSubject();
   },
   methods: {
-    intoPractice() {
+    intoPractice () {
       this.form.subjectIds = this.subjests.join();
       this.form.types = this.questionsTypes.join();
       this.$api
         .createTestBySubject(this.form)
         .then(res => {
           this.$router.push({
-            path: "/questionList",
+            path: '/questionList',
             query: {
               testId: res.data
             }
@@ -84,14 +84,14 @@ export default {
           alert(error);
         });
     },
-    select(data) {
+    select (data) {
       if (this.subjests.indexOf(data) === -1) {
         this.subjests.push(data);
       } else {
         this.subjests.splice(this.subjests.indexOf(data), 1);
       }
     },
-    getSubject() {
+    getSubject () {
       this.$api
         .getSubjects()
         .then(res => {

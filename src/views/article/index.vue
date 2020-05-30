@@ -23,7 +23,7 @@
         <el-col :span="16">
           <div class="grid-content">
             <div style="float: left;width: 100%">
-              <el-tag>最新发表</el-tag>
+              <el-tag>推荐热帖</el-tag>
               <el-tag>最热帖子</el-tag>
               <el-tag>精华</el-tag>
             </div>
@@ -52,6 +52,12 @@
                       <div class="grid-content">发布时间: {{item.createTime | filterTime }}</div>
                     </el-col>
                     <el-col :span="5">
+                      <div v-if="item.type === 0">
+                        <el-tag>  {{item.knowledgeName}}</el-tag>
+                      </div>
+                      <div  v-if="item.type === 1">
+                        <el-tag type="success">  {{item.topic}}</el-tag>
+                      </div>
                     </el-col>
                   </el-row>
                 </el-main>
@@ -113,7 +119,6 @@
       },
       getUser (uid) {
         this.$api.getUser({userId: uid}).then(response => {
-          alert(response)
         }).catch((error) => {
           console.log(error);
         });

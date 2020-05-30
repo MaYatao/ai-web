@@ -19,9 +19,9 @@
         </template>
       </el-table-column>
 
-      <el-table-column width="180px" align="center" label="发表时间">
+      <el-table-column width="180px" align="center" label="学习时间">
         <template slot-scope="scope">
-          <span>{{ scope.row.createTime | parseTime('{Y}-{M}-{D} {h}:{m}:{s}') }}</span>
+          <span>{{ scope.row.lastTime | parseTime('{Y}-{M}-{D} {h}:{m}:{s}') }}</span>
         </template>
       </el-table-column>
 
@@ -34,7 +34,7 @@
            </template>
          </el-table-column>-->
 
-      <el-table-column class-name="status-col" label="学习基础" width="110px">
+      <el-table-column class-name="status-col" label="学习时间" width="110px">
         <template slot-scope="scope">
           <span>{{ scope.row.basics }}</span>
         </template>
@@ -97,7 +97,7 @@
     methods: {
       getList () {
         this.listLoading = true
-        this.$api.getCourseById(this.listQuery).then(response => {
+        this.$api.getMyCourseById(this.listQuery).then(response => {
           this.list = response.data.list
           this.total = response.data.total
         })

@@ -10,7 +10,7 @@ const store = new Vuex.Store({
     isLogin: true,
     name: '',
     user: JSON.parse(localStorage.getItem('userInfo')) || '', // 先去localStorage中获取数据,
-    roles: ['教师']
+    roles: ''
   },
   mutations: {
     set_isLogin (state, flag) {
@@ -64,6 +64,7 @@ const store = new Vuex.Store({
     LogOut ({ commit, state }) {
       return new Promise((resolve, reject) => {
         commit('logout')
+        commit('set_isLogin', false)
       })
     }
   },

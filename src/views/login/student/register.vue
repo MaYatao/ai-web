@@ -53,11 +53,14 @@
         </el-input>
       </el-form-item>
       <el-form-item prop="direction" label="期望方向">
-        <el-input
-          type="text"
-          v-model="ReginForm.direction"
-          placeholder="期望方向">
-        </el-input>
+        <el-select v-model="ReginForm.direction" placeholder="请选择方向">
+          <el-option
+            v-for="item in subjectOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item prop="description" label="自我描述">
         <el-input
@@ -103,6 +106,7 @@
         }
       }
       return {
+        subjectOptions: [],
         ReginForm: {
           username: '',
           password: '',
@@ -111,6 +115,7 @@
           sex: 'false',
           school: '',
           identity: 0,
+          direction: '',
           expectation: '',
           description: ''
         },
@@ -143,13 +148,24 @@
       }
     },
     methods: {
+      getSubject () {
+        this.$api
+          .getSubjects()
+          .then(res => {
+            this.subjectOptions = res.data;
+          })
+          .catch(error => {
+            console.log(error);
+            alert(error);
+          });
+      },
       submit () {
         this.$refs.ReginForm.validate(valid => {
           if (valid) {
             this.$api.studentRegister(this.ReginForm)
               .then(() => {
-              this.$router.push({ path: '/login' });
-            })
+                this.$router.push({ path: '/login' });
+              })
               .catch((error) => {
                 alert(error);
               });
@@ -165,6 +181,9 @@
       tologin () {
         this.$router.push('/login')
       }
+    },
+    created () {
+      this.getSubject();
     }
   }
 </script>

@@ -43,8 +43,8 @@
       </el-form-item>
       <el-form-item prop="sex" label="性别">
         <el-radio-group v-model="ReginForm.sex">
-          <el-radio label="男" value=0></el-radio>
-          <el-radio label="女" value=1></el-radio>
+          <el-radio v-model="ReginForm.sex" label="false">男</el-radio>
+          <el-radio v-model="ReginForm.sex" label="true">女</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item prop="school" label="学校">
@@ -67,8 +67,7 @@
           type="success"
           class="submitBtn"
           round
-          @click.native.prevent="submit"
-          :loading="logining">
+          @click.native.prevent="submit">
           注册
         </el-button>
         <el-button
@@ -103,18 +102,17 @@
           password: '',
           confirmpassword: '',
           birthday: '',
-          sex: 1,
+          sex: 'false',
           school: '',
           identity: 1,
           description: ''
         },
-        logining: false,
         rule: {
           username: [
             {
               required: true,
               max: 14,
-              min: 7,
+              min: 2,
               message: '用户名是必须的，长度为7-14位',
               trigger: 'blur'
             }
@@ -141,8 +139,8 @@
       submit () {
         this.$refs.ReginForm.validate(valid => {
           if (valid) {
-            this.logining = true
-            this.$api.post('user/register', this.ReginForm, response => {
+            this.$api.teacherRegister(this.ReginForm).then((response) => {
+              this.tologin()
               if (response.status >= 200 && response.status < 300) {
                 console.log(response.data);
               } else {

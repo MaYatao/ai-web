@@ -24,9 +24,7 @@
           <el-tag>综合评分 9.50</el-tag>
         </div>
         <div>
-          <el-tag>{{infoForm.knowledge1}}</el-tag>
-          <el-tag>{{infoForm.knowledge2}}</el-tag>
-          <el-tag>{{infoForm.knowledge3}}</el-tag>
+         知识点： <el-tag>{{infoForm.knowledgeName}}</el-tag>
         </div>
       </div>
       <div class="right" style="width: 400px">
@@ -96,73 +94,71 @@
 </template>
 
 <script>
-import { quillEditor } from "vue-quill-editor";
+  import {quillEditor} from 'vue-quill-editor';
 
-//:style="{backgroundImage: 'url(' + infoForm.imageUrl + ')', backgroundSize:'cover'}"
+  // :style="{backgroundImage: 'url(' + infoForm.imageUrl + ')', backgroundSize:'cover'}"
 
-export default {
-  name: "CourseBody",
-  components: { quillEditor },
-  data() {
-    return {
-      commentText: "",
-      activeName: "first",
-      infoForm: {
-        courseId: 3,
-        title: "Java入门第一季",
-        description:
-          "本教程为Java入门第一季，欢迎来到精彩的Java编程世界！Java语言已经成为当前软件开发行业中主流的开发语言。本教程将介绍Java环境搭建、工具使用、基础语法。带领大家一步一步的踏入Java达人殿堂！Let’s go!",
-        basics: "0基础",
-        goal: "学习大神",
-        url:
-          "http://192.168.183.130/group1/M00/00/00/wKi3gl7JK6-ANYLmAABUA67-KI8345.mp4",
-        imageUrl:
-          "http://192.168.183.130/group1/M00/00/00/wKi3gl7JK7uAMjf9AACJTjs7_vA018.jpg",
-        createTime: "2020-05-23 21:57:23",
-        userId: 1,
-        username: null,
-        direction: 2,
-        degree: 3,
-        subject: 27,
-        knowledge1: 1,
-        knowledge3: 3,
-        knowledge2: 2
+  export default {
+    name: 'CourseBody',
+    components: {quillEditor},
+    data () {
+      return {
+        commentText: '',
+        activeName: 'first',
+        infoForm: {
+          courseId: '',
+          title: '',
+          description: '',
+          basics: '',
+          goal: '',
+          url: '',
+          imageUrl:
+            '',
+          createTime: '',
+          userId: '',
+          username: '',
+          direction: '',
+          degree: '',
+          subject: '',
+          knowledge1: '',
+          knowledge3: '',
+          knowledge2: ''
+        },
+        comments: {}
+      };
+    },
+    created () {
+      this.getParams();
+      this.getCourseById();
+      this.getComment();
+    },
+    methods: {
+      getParams () {
+        var courseId = this.$route.query.courseId;
+        this.infoForm.courseId = courseId;
       },
-      comments: {}
-    };
-  },
-  created() {
-    this.getParams();
-    this.getCourseById();
-    this.getComment();
-  },
-  methods: {
-    getParams() {
-      var courseId = this.$route.query.courseId;
-      this.infoForm.courseId = courseId;
-    },
-    getCourseById() {
-      this.$api
-        .getCourseById({ courseId: this.infoForm.courseId })
-        .then(response => {
-          this.infoForm = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
-    getComment() {
-      this.$api
-        .getCommentByCourseId({ courserId: 2 })
-        .then(response => {
-          this.comments = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      getCourseById () {
+        this.$api
+          .getCourseById({courseId: this.infoForm.courseId})
+          .then(response => {
+            this.infoForm = response.data;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      },
+      getComment () {
+        this.$api
+          .getCommentByCourseId({courserId: 2})
+          .then(response => {
+            this.comments = response.data;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
     }
-  }
-};
+  };
 </script>
 
 <style scoped>

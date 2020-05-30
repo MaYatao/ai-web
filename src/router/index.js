@@ -34,7 +34,9 @@ import informationIndex from '../views/Information/Index'
 import myInfo from '../views/Information/MyInfo'
 import myTests from '../views/Information/MyTests'
 import myQuestions from '../views/Information/MyQuestions'
+import myQuestions1 from '../views/Information/MyQuestions1'
 import studyIndex from '../views/study/Index'
+import map from '../views/study/Map'
 import messageIndex from '../views/message/Index'
 import userIndex from '../views/user/Index'
 import editUser from '../views/user/editUser'
@@ -68,6 +70,51 @@ export default new Router({
           meta: {
             isLogin: true, // 是否登录
             roles: ['教师', '学生'] // 是否登录
+          }
+        },
+        {
+          path: '/courseBody',
+          name: 'courseBody',
+          component: courseBody,
+          meta: {
+            isLogin: true, // 是否登录
+            roles: ['学生', '教师'] // 是否登录
+          }
+        },
+        {
+          path: '/courseDetail',
+          name: 'courseDetail',
+          component: courseDetail,
+          meta: {
+            isLogin: true, // 是否登录
+            roles: ['学生', '教师'] // 是否登录
+          }
+        },
+        {
+          path: '/courseManager',
+          name: 'courseManager',
+          component: courseManager,
+          meta: {
+            isLogin: true, // 是否登录
+            roles: ['学生', '教师'] // 是否登录
+          }
+        },
+        {
+          path: '/tests',
+          name: 'tests',
+          component: tests,
+          meta: {
+            isLogin: true, // 是否登录
+            roles: ['学生', '教师'] // 是否登录
+          }
+        },
+        {
+          path: '/questions',
+          name: 'questions',
+          component: questions,
+          meta: {
+            isLogin: true, // 是否登录
+            roles: ['学生', '教师'] // 是否登录
           }
         },
         {
@@ -176,6 +223,15 @@ export default new Router({
               }
             },
             {
+              path: '/myQuestions1',
+              name: 'myQuestions1',
+              component: myQuestions1,
+              meta: {
+                isLogin: true, // 是否登录
+                roles: ['学生', '教师'] // 是否登录
+              }
+            },
+            {
               path: '/myQuestions',
               name: 'myQuestions',
               component: myQuestions,
@@ -197,6 +253,14 @@ export default new Router({
               path: '/studyIndex',
               name: 'studyIndex',
               component: studyIndex,
+              meta: {
+                isLogin: true, // 是否登录
+                roles: ['学生', '教师'] // 是否登录
+              }
+            }, {
+              path: '/map',
+              name: 'map',
+              component: map,
               meta: {
                 isLogin: true, // 是否登录
                 roles: ['学生', '教师'] // 是否登录
@@ -347,11 +411,7 @@ export default new Router({
     {
       path: '/teacherLogin',
       name: 'teacherLogin',
-      component: teacherLogin,
-      meta: {
-        isLogin: true, // 是否登录
-        roles: ['学生', '教师'] // 是否登录
-      }
+      component: teacherLogin
     },
     {
       path: '/register',
@@ -361,56 +421,7 @@ export default new Router({
     {
       path: '/teacherRegister',
       name: 'teacherRegister',
-      component: teacherRegister,
-      meta: {
-        isLogin: true, // 是否登录
-        roles: ['学生', '教师'] // 是否登录
-      }
-    },
-    {
-      path: '/courseBody',
-      name: 'courseBody',
-      component: courseBody,
-      meta: {
-        isLogin: true, // 是否登录
-        roles: ['学生', '教师'] // 是否登录
-      }
-    },
-    {
-      path: '/courseDetail',
-      name: 'courseDetail',
-      component: courseDetail,
-      meta: {
-        isLogin: true, // 是否登录
-        roles: ['学生', '教师'] // 是否登录
-      }
-    },
-    {
-      path: '/courseManager',
-      name: 'courseManager',
-      component: courseManager,
-      meta: {
-        isLogin: true, // 是否登录
-        roles: ['学生', '教师'] // 是否登录
-      }
-    },
-    {
-      path: '/tests',
-      name: 'tests',
-      component: tests,
-      meta: {
-        isLogin: true, // 是否登录
-        roles: ['学生', '教师'] // 是否登录
-      }
-    },
-    {
-      path: '/questions',
-      name: 'questions',
-      component: questions,
-      meta: {
-        isLogin: true, // 是否登录
-        roles: ['学生', '教师'] // 是否登录
-      }
+      component: teacherRegister
     }
   ]
 })

@@ -57,16 +57,17 @@
           <el-form-item label="科目" style="margin: 30px 60px">
             <el-cascader @change="getKnowledgesBySId" :options="subjectOptions" v-model="sort" clearable placeholder="请选择"></el-cascader>
           </el-form-item>
-          <el-form-item v-if="sort.length !== 0" label="知识点" style="margin: 30px 60px">
-            <el-select v-model="knowledges" multiple placeholder="请选择">
-              <el-option
-                v-for="item in knowledgeOptions"
-                :key="item.knowledgeId"
-                :label="item.title"
-                :value="item.knowledgeId"
-              ></el-option>
-            </el-select>
+          <el-form-item label="选择" style="margin: 30px 60px">
+            <el-tag> {{ infoForm.knowledgeName}}</el-tag>
+            <el-button @click="open" type="primary" style="margin-left: 16px;">
+              点我选择 </el-button>
           </el-form-item>
+          <el-drawer
+            title="知识点选择"
+            :visible.sync="drawer"
+            :with-header="false">
+            <div id='char' ref="chart" style='width: 600px;height:600px;margin: 30px'></div>
+          </el-drawer>
           <el-form-item style="margin: 100px 100px" >
             <el-button type="primary" @click="onSubmit">确认发布</el-button>
           </el-form-item>
@@ -78,12 +79,15 @@
 </template>
 
 <script>
+  import echarts from 'echarts'
+
   import { quillEditor } from 'vue-quill-editor' // 调用编辑器
   export default {
     name: 'choicesQuestion',
     data () {
       return {
         subjectOptions: [],
+        drawer: false,
         sort: [],
         knowledges: [],
         knowledgeOptions: [],
@@ -94,9 +98,7 @@
           options: [],
           content: '',
           uid: this.$store.state.user.userId,
-          knowledge1: '',
-          knowledge2: '',
-          knowledge3: '',
+          knowledgeName: '',
           status: 0,
           subject: '',
           direction: '',
@@ -135,16 +137,104 @@
           alert(error)
         });
       },
-      getKnowledgesBySId (values) {
-        this.knowledges = [];
-        this.$api.getKnowledgesBySId({ 'subjectId': values[1] })
-          .then(res => {
-            this.knowledgeOptions = res.data;
-          })
+     getKnowledgesBySId (values) {
+        this.getSId();
+      },
+      open () {
+        this.drawer = true
+        this.drawPie()
+      },
+      getSId () {
+        this.$api.getBySid({'subjectId': this.sort[1]}).then(res => {
+          this.nodes = res.data.data
+          this.nodeLink = res.data.links
+        })
           .catch(error => {
             console.log(error);
-            alert(error);
           });
+      },
+      drawPie () {
+        var charts = echarts.init(document.getElementById('char'))
+        var categories = [
+          {name: '科目'},
+          {name: '知识点'}
+        ];
+        charts.setOption({
+          title: {
+            text: '知识图谱'
+          },
+          tooltip: {
+            formatter: function (params) {
+              return params.name + (params.value ? ' : ' + params.value : '')
+            }
+          },
+          animationDurationUpdate: 1500,
+          animationEasingUpdate: 'quinticInOut',
+
+          toolbox: {
+            feature: {
+              restore: {}
+            }
+          },
+          legend: {
+            show: true,
+            data: categories
+          },
+          series: [{
+            type: 'graph',
+            layout: 'force',
+            roam: true,
+            hoverAnimation: true,
+            focusNodeAdjacency: true,
+            draggable: true,
+            symbolSize: 33,
+            force: {
+              repulsion: 200,
+              edgeLength: 100
+            },
+            itemStyle: {
+              normal: {
+                borderColor: '#fff',
+                borderWidth: 1,
+                shadowBlur: 10,
+                shadowColor: 'rgba(0, 0, 0, 0.3)'
+              }
+            },
+            lineStyle: {
+              width: 0.5,
+              curveness: 0, /* 线条弯的角度 */
+              opacity: 0.8
+            },
+            label: {
+              emphasis: {
+                position: 'center',
+                show: false
+              }
+            },
+            emphasis: {
+              itemStyle: {
+                borderWidth: 3
+              },
+              lineStyle: {
+                color: 'gray',
+                width: 3
+              }
+            },
+            data: this.nodes,
+            links: this.nodeLink,
+            categories: categories
+          }]
+        });
+        charts.on('click', (param) => {
+          console.log('param---->', param); // 打印出param, 可以看到里边有很多参数可以使用
+          if (param.dataType === 'node') {
+            var knowledge = param.name
+            this.infoForm.knowledgeName = knowledge
+            this.drawer = false
+          } else {
+            /*  alert('点击了边' + param.value) */
+          }
+        });
       },
       onSubmit () {
         // 提交
@@ -157,6 +247,7 @@
         this.infoForm.subject = this.sort[1]
         this.$api.createQuestion(this.infoForm).then(res => {
           this.questionOptions = [];
+          alert('上传成功')
         }).catch((error) => {
           console.log(error);
           alert(error)
